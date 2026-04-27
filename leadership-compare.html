@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership Card Options</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --radius: 14px;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Satoshi', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px;
+    }
+
+    /* switcher */
+    .switcher {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: #111;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Satoshi', system-ui, sans-serif;
+    }
+
+    .sw-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.55);
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sw-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .sw-btn.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+
+    .panel { display: none; padding-top: 56px; }
+    .panel.visible { display: block; }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    /* card shell */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 680px;
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 2/1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-info { padding: 18px 20px 22px; }
+    .project-tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; font-weight: 600; color: var(--muted);
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 2px 9px; border-radius: 100px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .project-info h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 5px; }
+    .project-info p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+    .project-arrow { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--text); font-weight: 600; margin-top: 12px; }
+
+    /* ── OPTION 3: CARD DECK ── */
+    .thumb-deck {
+      background: linear-gradient(135deg, #431407 0%, #9a3412 60%, #c2410c 100%);
+    }
+
+    .deck-card {
+      position: absolute;
+      width: 52%;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    }
+
+    .deck-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+
+    /* ── OPTION 4: STAT CARD ── */
+    .thumb-stat {
+      background: linear-gradient(135deg, #431407 0%, #9a3412 60%, #c2410c 100%);
+      flex-direction: column;
+      gap: 0;
+      padding: 32px 40px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .stat-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      width: 100%;
+    }
+
+    .stat-item {
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      margin-right: 28px;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+      margin-right: 0;
+    }
+
+    .stat-num {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 20px 0;
+    }
+
+    .stat-quote {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+      line-height: 1.6;
+      font-style: italic;
+      max-width: 480px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="switcher">
+    <span>Leadership card:</span>
+    <button class="sw-btn active" onclick="show('opt3', this)">Option 3 — Card Deck</button>
+    <button class="sw-btn" onclick="show('opt4', this)">Option 4 — Stats</button>
+  </div>
+
+  <!-- OPTION 3: CARD DECK -->
+  <div id="opt3" class="panel visible">
+    <p class="label">Option 3 — Stacked card deck</p>
+    <div class="project-card">
+      <div class="project-thumb thumb-deck">
+        <div class="deck-card" style="transform: rotate(-10deg) translate(-30%, 5%); z-index: 1;">
+          <img src="images/leadership/Frame%2036.png" alt="" />
+        </div>
+        <div class="deck-card" style="transform: rotate(-3deg) translate(-5%, 2%); z-index: 2;">
+          <img src="images/leadership/Frame%207.png" alt="" />
+        </div>
+        <div class="deck-card" style="transform: rotate(8deg) translate(25%, -3%); z-index: 3;">
+          <img src="images/leadership/IMG_4421%202.png" alt="" />
+        </div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="tag">Design Ops</span><span class="tag">Leadership</span></div>
+        <h3>Leadership Initiatives</h3>
+        <p>Building design operations, scaling team capabilities, and establishing frameworks that empower designers to think and execute strategically.</p>
+        <span class="project-arrow">View case study →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 4: STATS -->
+  <div id="opt4" class="panel">
+    <p class="label">Option 4 — Stats & impact</p>
+    <div class="project-card">
+      <div class="project-thumb thumb-stat">
+        <div class="stat-eyebrow">Director of Product Design · Yodlee | Envestnet</div>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-num">12+</div>
+            <div class="stat-desc">Years leading design teams</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">8M</div>
+            <div class="stat-desc">Users impacted across products</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-desc">Industries — fintech, health, insurance, non-profit</div>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-quote">"Empowering designers to think strategically and design experiences with purpose."</div>
+      </div>
+      <div class="project-info">
+        <div class="project-tags"><span class="tag">Design Ops</span><span class="tag">Leadership</span></div>
+        <h3>Leadership Initiatives</h3>
+        <p>Building design operations, scaling team capabilities, and establishing frameworks that empower designers to think and execute strategically.</p>
+        <span class="project-arrow">View case study →</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function show(id, btn) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+      document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('visible');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recurring Payments Tracker — Nisarg Patel</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --accent: #c2410c;
+      --accent-bg: #fff4ee;
+      --accent-border: #fcd9c4;
+      --green: #2d6a4f;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .case-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #0f4c5c 60%, #0e7490 100%);
+      padding: 40px 48px;
+    }
+
+    .case-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .case-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .case-hero h1 {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 720px;
+      margin-bottom: 12px;
+    }
+
+    .case-hero-subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 600px;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .case-hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 28px;
+    }
+
+    .hero-stat-num {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+    }
+
+    /* ── COVER IMAGE ── */
+    .case-cover {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 48px 0;
+    }
+
+    .case-cover img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    /* ── BODY LAYOUT ── */
+    .case-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 48px 96px;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Sticky sidebar nav */
+    .case-nav {
+      position: sticky;
+      top: 80px;
+    }
+
+    .case-nav-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .case-nav a {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 5px 0 5px 12px;
+      border-left: 2px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .case-nav a:hover { color: var(--text); border-color: var(--accent); }
+    .case-nav a.active { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+
+    /* ── SECTIONS ── */
+    .case-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .case-section {
+      scroll-margin-top: 80px;
+      padding: 28px 0 32px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .case-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .case-section p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 12px;
+      max-width: 680px;
+    }
+
+    .case-section p:last-child { margin-bottom: 0; }
+
+    /* Lead sentence */
+    .lead {
+      font-size: 16px !important;
+      color: var(--text) !important;
+      font-weight: 500;
+      line-height: 1.75 !important;
+      margin-bottom: 14px !important;
+    }
+
+    /* Section image */
+    .section-img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+      margin: 24px 0;
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .callout p {
+      font-size: 15px;
+      color: var(--text);
+      margin: 0;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    /* Lists */
+    .case-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 14px 0;
+      counter-reset: list-counter;
+    }
+
+    .case-list li {
+      display: flex;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.65;
+      padding: 6px 0;
+      counter-increment: list-counter;
+      align-items: baseline;
+    }
+
+    .case-list li::before {
+      content: counter(list-counter, decimal-leading-zero);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .problem-list { counter-reset: none; }
+
+    .problem-list li::before {
+      content: '⊘';
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--accent);
+      counter-increment: none;
+      padding-top: 0;
+    }
+
+    /* AI Insights */
+    .insight-block {
+      margin: 20px 0;
+    }
+
+    .insight-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .insight-label::before {
+      content: '✦';
+      font-size: 9px;
+      color: var(--accent);
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .insight-stat {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .insight-desc {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    /* Strategy cards */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .strategy-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .strategy-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .strategy-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 7px;
+    }
+
+    .strategy-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Wireframe exploration */
+    .wireframe-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+      margin: 24px 0 20px;
+    }
+
+    .wireframe-hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .wireframe-hero-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .wireframe-hero-text p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .wireframe-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 0 0 16px;
+    }
+
+    .wireframe-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wireframe-item img {
+      width: 100%;
+      border-radius: 0;
+      display: block;
+      background: var(--surface2);
+    }
+
+    .wireframe-caption {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* User feedback quote */
+    .feedback-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 20px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feedback-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .feedback-quote {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .feedback-quote::before { content: '"'; color: var(--accent); }
+    .feedback-quote::after  { content: '"'; color: var(--accent); }
+
+    /* Feature gallery strip */
+    .feature-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .feature-flow .gallery-item {
+      flex: 1;
+    }
+
+    .flow-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 20px 0 10px;
+    }
+
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      margin-top: 80px;
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+
+
+    .gallery-img-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-info {
+      padding: 14px 14px 12px;
+      background: linear-gradient(135deg, #0f172a 0%, #0f4c5c 100%);
+    }
+
+    .gallery-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .gallery-desc {
+      font-size: 14px !important;
+      color: rgba(255,255,255,0.85) !important;
+      line-height: 1.3 !important;
+      margin: 0 !important;
+    }
+
+    /* ── FOOTER ── */
+    .case-footer-nav {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .case-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-back {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-back:hover { color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+
+      .case-hero { padding: 28px 20px 28px; }
+
+      .case-cover { padding: 24px 20px 0; }
+
+      .case-body {
+        grid-template-columns: 1fr;
+        padding: 32px 20px 64px;
+        gap: 0;
+      }
+
+      .case-nav { display: none; }
+
+      .strategy-grid { grid-template-columns: 1fr; }
+
+      .insight-grid { grid-template-columns: 1fr; }
+
+      .wireframe-row { grid-template-columns: 1fr !important; }
+
+      .feature-strip { flex-direction: column; }
+
+      .feature-flow { flex-direction: column; gap: 12px; }
+
+      .flow-arrow { transform: rotate(90deg); margin: 0 auto; }
+
+      .flow-label { font-size: 11px; }
+
+      .gallery-item.wide,
+      .gallery-item.narrow { width: 100%; }
+
+      .case-footer-inner { padding: 20px; flex-direction: column; gap: 10px; }
+
+      footer { padding: 20px; flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Nisarg Patel.</a>
+    <a href="index.html" class="nav-back">← Back to work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="case-hero">
+    <div class="case-hero-inner">
+      <h1>Recurring Payments Tracker</h1>
+      <p class="case-hero-subtitle">Empowering banks to help customers reduce wasteful spending by tracking recurring payments and redirecting savings into cancelling products.</p>
+      <div class="case-hero-stats">
+        <div>
+          <div class="hero-stat-num">1</div>
+          <div class="hero-stat-label">Centralized platform</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">0</div>
+          <div class="hero-stat-label">Surprise charges</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Visibility into recurring bills</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVER IMAGE -->
+  <div class="case-cover">
+    <img src="images/recurring/heroimage.png" alt="Recurring Payments Tracker" class="expandable" style="cursor: zoom-in;" />
+  </div>
+
+  <!-- BODY -->
+  <div class="case-body">
+
+    <!-- Sticky nav -->
+    <aside class="case-nav">
+      <div class="case-nav-label">On this page</div>
+      <a href="#problem">The Problem</a>
+      <a href="#role">My Role</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#research">Research & Testing</a>
+      <a href="#outcomes">Outcomes</a>
+    </aside>
+
+    <!-- Sections -->
+    <div class="case-sections">
+
+      <!-- PROBLEM -->
+      <div class="case-section" id="problem">
+        <div class="section-label">The Problem</div>
+        <h2>Subscriptions accumulate, and banks had no way to help</h2>
+        <p class="lead">Most consumers have no clear picture of what they are paying for each month. Streaming services, gym memberships, and forgotten trials quietly drain accounts with no central place to track them.</p>
+        <ul class="case-list problem-list">
+          <li>No single view of all recurring charges across aggregated accounts</li>
+          <li>Unused subscriptions going unnoticed for months</li>
+          <li>No easy path to cancel or modify payments from within the bank</li>
+          <li>Banks missing an opportunity to turn savings awareness into deposits or investments</li>
+        </ul>
+        <div class="insight-block">
+          <div class="insight-grid">
+            <div class="insight-card">
+              <div class="insight-stat">40%</div>
+              <div class="insight-desc">No single view of all recurring charges across aggregated accounts.</div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-stat">2.5×</div>
+              <div class="insight-desc">Most people spend more than twice what they think on subscriptions.</div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-stat">55%</div>
+              <div class="insight-desc">of people pay for at least one subscription they no longer use.</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top: 20px;">
+          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px;">Business Need</div>
+          <p>Give banks a scalable tool that helps customers take control of recurring spending.</p>
+        </div>
+      </div>
+
+      <!-- ROLE -->
+      <div class="case-section" id="role">
+        <div class="section-label">My Role</div>
+        <h2>Director of Product Design</h2>
+        <p class="lead">I owned design end to end, from early exploration through final delivery, working closely with engineering and product to shape the experience.</p>
+        <ul class="case-list">
+          <li>Led ideation and concept development across multiple design directions</li>
+          <li>Partnered with engineering to understand API data structure and constraints</li>
+          <li>Collaborated with product to align design decisions to capabilities</li>
+        </ul>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="case-section" id="strategy">
+        <div class="section-label">Strategy</div>
+        <h2>Design from the data up</h2>
+        <p class="lead">Before jumping into visuals, I spent time with engineering to understand what data was actually available through the API. That foundation shaped everything, from how merchants were identified to how cancellation flows were structured.</p>
+        <p>With data constraints clear, the team explored multiple concepts iteratively, pressure-testing each against real billing scenarios before committing to a direction. The goal was always to balance functional completeness with an experience that felt simple and trustworthy to the end user.</p>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <div class="strategy-num">01</div>
+            <h4>API-First Exploration</h4>
+            <p>Mapped available data fields before designing, ensuring every UI element had a reliable data source behind it.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">02</div>
+            <h4>Iterative Concept Development</h4>
+            <p>Explored multiple layout and interaction models through rapid wireframes, testing ideas early before investing in high-fidelity work.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">03</div>
+            <h4>Competitive Analysis</h4>
+            <p>Audited leading subscription management apps to identify patterns worth adopting and gaps worth owning.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RESEARCH & TESTING -->
+      <div class="case-section" id="research">
+        <div class="section-label">Research & Testing</div>
+        <h2>Testing our way to the right direction</h2>
+        <p class="lead"><strong>We started with Wireframe 1.</strong> After launching, we uncovered technical constraints that required us to go back and explore alternatives. We used <mark style="background: var(--accent-bg); color: var(--accent); padding: 1px 5px; border-radius: 4px; font-weight: 600;">AI tools</mark> to generate different variations quickly, then tested a few directions through Maze before deciding to move forward with the final design.</p>
+
+        <div class="wireframe-row" style="grid-template-columns: repeat(3, 1fr); margin-top: 20px; margin-bottom: 28px;">
+          <div class="wireframe-item">
+            <div class="wireframe-caption">Wireframe 1 — Initial launch</div>
+            <img src="images/recurring/wireframe1.png" alt="Wireframe 1" class="expandable" style="cursor: zoom-in;" />
+          </div>
+          <div class="wireframe-item">
+            <div class="wireframe-caption">Wireframe 2 — Tested, not pursued</div>
+            <img src="images/recurring/wireframe2.png" alt="Wireframe 2" class="expandable" style="cursor: zoom-in;" />
+          </div>
+          <div class="wireframe-item">
+            <div class="wireframe-caption">Wireframe 3 — Tested, not pursued</div>
+            <img src="images/recurring/wireframe3.png" alt="Wireframe 3" class="expandable" style="cursor: zoom-in;" />
+          </div>
+        </div>
+
+        <div class="feedback-block">
+          <div class="feedback-label">User Feedback via Maze</div>
+          <div class="feedback-quote">The calendar is a nice touch</div>
+          <p style="font-size: 16px; color: var(--text); margin: 0; line-height: 1.6; font-weight: 500; max-width: none;">Users found the high-level summary valuable as a quick glance before scanning the full list of subscriptions.</p>
+        </div>
+
+      </div>
+
+      <!-- OUTCOMES -->
+      <div class="case-section" id="outcomes">
+        <div class="section-label">Outcomes</div>
+        <h2>A tool that turns awareness into action</h2>
+        <p class="lead">The Recurring Payments Tracker gives customers full visibility into their bills in one place, with a clear path to cancel unused subscriptions and redirect savings.</p>
+
+        <div class="feature-strip">
+
+          <div class="gallery-item">
+            <div class="gallery-img-wrap">
+              <div class="gallery-info">
+                <div class="gallery-label">Desktop</div>
+                <p class="gallery-desc">Every subscription and bill in one centralized view, organized for quick scanning.</p>
+              </div>
+              <img src="images/recurring/landing.png" alt="Desktop view" class="expandable" style="cursor: zoom-in;" />
+            </div>
+          </div>
+
+          <div class="flow-label">Widget entry to merchant details, from awareness to action</div>
+
+          <div class="feature-flow">
+
+            <div class="gallery-item">
+              <div class="gallery-img-wrap">
+                <div class="gallery-info">
+                  <div class="gallery-label">Contextual Widget</div>
+                  <p class="gallery-desc">A lightweight entry point surfaced within the broader banking experience.</p>
+                </div>
+                <img src="images/recurring/widget.png" alt="Widget" class="expandable" style="cursor: zoom-in;" />
+              </div>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="gallery-item">
+              <div class="gallery-img-wrap">
+                <div class="gallery-info">
+                  <div class="gallery-label">Mobile</div>
+                  <p class="gallery-desc">Fully responsive across device sizes.</p>
+                </div>
+                <img src="images/recurring/landingmobile.png" alt="Mobile view" class="expandable" style="cursor: zoom-in;" />
+              </div>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="gallery-item">
+              <div class="gallery-img-wrap">
+                <div class="gallery-info">
+                  <div class="gallery-label">Merchant Details</div>
+                  <p class="gallery-desc">Full payment history and one-tap cancel for each merchant.</p>
+                </div>
+                <img src="images/recurring/merchantdetails.png" alt="Merchant details" class="expandable" style="cursor: zoom-in;" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="gallery-item" style="margin-top: 20px;">
+          <div class="gallery-img-wrap">
+            <div class="gallery-info">
+              <div class="gallery-label">Change Payment Account Flow</div>
+              <p class="gallery-desc">Full experience from wireframe to hi-fi design, showing the end-to-end flow for updating a payment account.</p>
+            </div>
+            <img src="images/recurring/change payment flow.png" alt="Change Payment Account Flow" class="expandable" style="cursor: zoom-in;" />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <div id="lightbox-controls" style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="zoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'">−</button>
+      <span id="zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="zoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'">+</button>
+      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px; transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Close</button>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="case-footer-nav">
+    <div class="case-footer-inner">
+      <a href="index.html" class="footer-back">← Back to all work</a>
+      <span style="font-size:13px; color: var(--muted);">Next: Abe AI →</span>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Nisarg Patel. All rights reserved.</p>
+    <p>Built from scratch, no Framer needed.</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.case-section');
+    const navLinks = document.querySelectorAll('.case-nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.case-nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const zoomLabel = document.getElementById('zoom-level');
+    let currentZoom = 1;
+    let panX = 0, panY = 0;
+    let isDragging = false;
+    let startX, startY;
+
+    function applyTransform() {
+      lightboxImg.style.transform = `scale(${currentZoom}) translate(${panX / currentZoom}px, ${panY / currentZoom}px)`;
+      zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
+      lightboxImg.style.cursor = currentZoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default';
+    }
+
+    function zoomIn() {
+      currentZoom = Math.min(currentZoom + 0.25, 4);
+      applyTransform();
+    }
+
+    function zoomOut() {
+      currentZoom = Math.max(currentZoom - 0.25, 0.5);
+      if (currentZoom === 1) { panX = 0; panY = 0; }
+      applyTransform();
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+      currentZoom = 1;
+      panX = 0; panY = 0;
+      applyTransform();
+    }
+
+    // Pan events
+    lightboxImg.addEventListener('mousedown', e => {
+      if (currentZoom <= 1) return;
+      isDragging = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+      applyTransform();
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      applyTransform();
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      applyTransform();
+    });
+
+    // Scroll to zoom
+    lightboxImg.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }, { passive: false });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        currentZoom = 1;
+        panX = 0; panY = 0;
+        applyTransform();
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === '+' || e.key === '=') zoomIn();
+      if (e.key === '-') zoomOut();
+    });
+  </script>
+</body>
+</html>

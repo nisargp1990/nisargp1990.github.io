@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisarg Patel — Design Leader</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --green: #2d6a4f;
+      --accent: #c2410c;
+      --accent-bg: #fff4ee;
+      --accent-border: #fcd9c4;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-tagline {
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 1px solid var(--border);
+      padding-left: 32px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5ee;
+      border: 1px solid #b7dfc7;
+      color: var(--green);
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .nav-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── COMPACT HERO ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 48px 52px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      background: linear-gradient(180deg, #1a1a1a 0%, #555555 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      -webkit-text-fill-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .hero-meta p {
+      font-size: 16px;
+      color: var(--muted);
+      text-align: right;
+      max-width: 280px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.8; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--surface2); }
+
+    /* ── DIVIDER ROW ── */
+    .divider-row {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin: 0 20px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      transition: box-shadow 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+
+    .project-card.wide { grid-column: span 2; }
+
+    .project-thumb {
+      width: 100%;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .project-thumb-bg { position: absolute; inset: 0; }
+
+    .c1 { background: linear-gradient(135deg, #dde8f5 0%, #c5d8f0 100%); }
+    .c2 { background: linear-gradient(135deg, #e8f0fd 0%, #c8d8f5 100%); }
+    .c3 { background: linear-gradient(135deg, #e0f0fa 0%, #b8ddf5 100%); }
+    .c4 { background: linear-gradient(135deg, #f0ede8 0%, #e0d8cc 100%); }
+
+    .project-thumb-icon {
+      position: relative;
+      z-index: 1;
+      font-size: 44px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+    }
+
+    .thumb-cover img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    /* ── MARKETING CARD THUMBNAILS ── */
+    .thumb-marketing {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-marketing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .thumb-marketing img {
+      position: relative;
+      z-index: 1;
+      height: 92%;
+      width: auto;
+      max-width: 86%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 48px rgba(0,0,0,0.45));
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .thumb-marketing img {
+      transform: translateY(-5px);
+    }
+
+    .thumb-tall { height: 340px; }
+
+    .bg-blue   { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+    .bg-violet { background: linear-gradient(135deg, #1e1b4b 0%, #5b21b6 100%); }
+    .bg-teal   { background: linear-gradient(135deg, #022c22 0%, #065f46 100%); }
+    .bg-slate  { background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%); }
+    .bg-indigo { background: linear-gradient(135deg, #1e1035 0%, #312e81 60%, #4338ca 100%); }
+
+    /* ── LEADERSHIP STATS CARD ── */
+    .thumb-leadership {
+      background: linear-gradient(135deg, #431407 0%, #9a3412 60%, #c2410c 100%);
+      flex-direction: column;
+      gap: 0;
+      padding: 28px 28px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      width: 100%;
+    }
+
+    .stat-item {
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      margin-right: 28px;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+      margin-right: 0;
+    }
+
+    .stat-num {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 20px 0;
+    }
+
+    .stat-quote {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+      line-height: 1.6;
+      font-style: italic;
+      max-width: 480px;
+    }
+
+    .project-info {
+      padding: 18px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 2px 9px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .project-info h3 {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .project-info p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    /* ── PAST PRODUCTS TOGGLE ── */
+    .past-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .past-toggle-line { flex: 1; height: 1px; background: var(--border); }
+
+    .past-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .past-toggle-btn:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-bg); }
+
+    .past-toggle-btn .chevron {
+      font-style: normal;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      font-size: 10px;
+    }
+
+    .past-toggle-btn.open .chevron { transform: rotate(180deg); }
+
+    .past-cards {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+
+    .past-cards.open { max-height: 800px; }
+
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding-top: 14px;
+    }
+
+    .bg-amber { background: linear-gradient(135deg, #431407 0%, #92400e 100%); }
+    .bg-stone  { background: linear-gradient(135deg, #1c1917 0%, #44403c 100%); }
+
+    /* ── BOTTOM STRIP: ABOUT + CONTACT ── */
+    .bottom-strip {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .bottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .about-block p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .skill-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .exp-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .exp-item {
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .exp-item .role { font-size: 13px; font-weight: 600; }
+    .exp-item .company { font-size: 12px; color: var(--green); font-weight: 500; }
+    .exp-item .period { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    .contact-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .contact-block p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .contact-link:hover { background: var(--surface2); border-color: #ccc; }
+    .contact-link span { color: var(--muted); font-size: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-badge { display: none; }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 20px 32px;
+        gap: 24px;
+      }
+
+      .hero-meta {
+        align-items: flex-start;
+      }
+
+      .hero-meta p { text-align: left; max-width: 100%; }
+
+      .hero-actions { flex-direction: row; flex-wrap: wrap; }
+
+
+      .projects { padding: 0 20px; }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.wide { grid-column: span 1; }
+
+      .section-header { padding: 32px 20px 12px; }
+
+      .past-grid { grid-template-columns: 1fr; }
+
+      .projects { padding-bottom: 40px; }
+
+      .bottom-inner {
+        grid-template-columns: 1fr;
+        padding: 32px 20px;
+        gap: 32px;
+      }
+
+      .exp-items { grid-template-columns: 1fr; }
+
+      footer { padding: 20px; flex-direction: column; gap: 4px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="#" class="nav-logo">Nisarg Patel.</a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="mailto:nisargp1990@gmail.com">Contact</a></li>
+      </ul>
+      <div class="nav-badge">Open to opportunities</div>
+    </div>
+  </nav>
+
+  <!-- COMPACT HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <p style="font-size: 22px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 6px;">I'm Nisarg.</p>
+      <h1>Product Design leader<br/>with <em>12+ years</em> crafting<br/>human-centered products.</h1>
+    </div>
+    <div class="hero-meta">
+      <p>Empowering teams to think strategically and design with purpose.</p>
+      <div class="hero-actions">
+        <a href="mailto:nisargp1990@gmail.com" class="btn-primary">Get in touch</a>
+        <a href="#" class="btn-secondary">Resume ↓</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="projects">
+    <div class="projects-grid">
+
+      <a href="pfm.html" class="project-card wide">
+        <div class="project-thumb thumb-marketing bg-blue">
+          <img src="images/pfm.png" alt="Personal Financial Management dashboard" />
+        </div>
+        <div class="project-info">
+          <div class="project-tags">
+            <span class="tag">Fintech</span>
+            <span class="tag">Responsive</span>
+            <span class="tag">B2B2C</span>
+            <span class="tag">8M Users</span>
+            <span class="tag">15 Firms</span>
+          </div>
+          <h3>Financial & Advisor Dashboards</h3>
+          <p>Modernizing an experience for effortless financial management.</p>
+          <span class="project-arrow">View Product →</span>
+        </div>
+      </a>
+
+      <a href="rpt.html" class="project-card">
+        <div class="project-thumb thumb-marketing thumb-tall bg-violet">
+          <img src="images/rpt.png" alt="Recurring Payments Tracker" />
+        </div>
+        <div class="project-info">
+          <div class="project-tags"><span class="tag">Fintech</span><span class="tag">Consumer</span><span class="tag">Responsive</span></div>
+          <h3>Recurring Payments Tracker</h3>
+          <p>Enabling consumers to take control of subscriptions with real-time visibility and instant cancellations.</p>
+          <span class="project-arrow">View Product →</span>
+        </div>
+      </a>
+
+      <a href="abe.html" class="project-card">
+        <div class="project-thumb thumb-marketing thumb-tall bg-teal">
+          <img src="images/chatbot.png" alt="Abe AI" />
+        </div>
+        <div class="project-info">
+          <div class="project-tags"><span class="tag">AI</span><span class="tag">Fintech</span></div>
+          <h3>Abe AI</h3>
+          <p>Enabling clients to offer instant, personalized support utilizing AI to enhance customer experience.</p>
+          <span class="project-arrow">View Product →</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <div class="project-thumb thumb-marketing thumb-tall bg-indigo">
+        </div>
+        <div class="project-info">
+          <div class="project-tags"><span class="tag">Fintech</span><span class="tag">B2B</span></div>
+          <h3>Advisor Portal</h3>
+          <p>Designing the foundational advisor experience that became the UI backbone for the broader PFM platform.</p>
+          <span class="project-arrow">View Product →</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <div class="project-thumb thumb-leadership">
+          <div class="stat-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="stat-item">
+              <div class="stat-num" style="font-size: 36px;">12+</div>
+              <div class="stat-desc">Years leading design teams</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num" style="font-size: 36px;">8M</div>
+              <div class="stat-desc">Users impacted across products</div>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-quote">"Empowering designers to think strategically and design experiences with purpose."</div>
+        </div>
+        <div class="project-info">
+          <div class="project-tags"><span class="tag">Design Ops</span><span class="tag">Leadership</span><span class="tag">Mentorship</span><span class="tag">Design Systems</span><span class="tag">User Testing</span></div>
+          <h3>Leadership Initiatives</h3>
+          <p>Building design operations, scaling team capabilities, and establishing frameworks that empower designers to think and execute strategically.</p>
+          <span class="project-arrow">View Initiatives →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- PAST PRODUCTS -->
+    <div class="past-toggle" onclick="togglePast(this)">
+      <div class="past-toggle-line"></div>
+      <button class="past-toggle-btn">Past Products <span class="chevron">▾</span></button>
+      <div class="past-toggle-line"></div>
+    </div>
+
+    <div class="past-cards" id="pastCards">
+      <div class="past-grid">
+
+        <a href="#" class="project-card">
+          <div class="project-thumb thumb-marketing bg-amber">
+            <span style="font-size:40px;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3))">🏥</span>
+          </div>
+          <div class="project-info">
+            <div class="project-tags"><span class="tag">Healthcare</span><span class="tag">Enterprise</span></div>
+            <h3>Project Title</h3>
+            <p>Brief description of this past project and the impact it had.</p>
+            <span class="project-arrow">View Product →</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <div class="project-thumb thumb-marketing bg-stone">
+            <span style="font-size:40px;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3))">🛡️</span>
+          </div>
+          <div class="project-info">
+            <div class="project-tags"><span class="tag">Insurance</span><span class="tag">B2B</span></div>
+            <h3>Project Title</h3>
+            <p>Brief description of this past project and the impact it had.</p>
+            <span class="project-arrow">View Product →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM: CONTACT -->
+  <div class="bottom-strip" id="contact">
+    <div class="bottom-inner" style="grid-template-columns: 1fr 1fr;">
+
+      <div class="contact-block">
+        <h3>Get in touch</h3>
+        <p>Open to design leadership roles, consulting, and collaborations.</p>
+      </div>
+
+      <div class="contact-links" style="display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+        <a href="mailto:nisargp1990@gmail.com" class="contact-link">nisargp1990@gmail.com <span>↗</span></a>
+        <a href="https://linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+        <a href="#" class="contact-link">Resume <span>↓</span></a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    function togglePast(row) {
+      const cards = document.getElementById('pastCards');
+      const btn = row.querySelector('.past-toggle-btn');
+      const isOpen = cards.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.childNodes[0].textContent = isOpen ? 'Past Products ' : 'Past Products ';
+    }
+  </script>
+</body>
+</html>
