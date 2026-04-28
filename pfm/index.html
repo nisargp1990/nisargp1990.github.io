@@ -728,7 +728,7 @@
 
   <!-- COVER IMAGE -->
   <div class="case-cover">
-    <img src="../images/pfm/Dashboard.png" alt="Financial & Advisor Dashboards" class="expandable" style="cursor: zoom-in;" />
+    <img src="../images/pfm/Dashboard.png" data-full="../images/pfm/Dashboardfull.png" alt="Financial & Advisor Dashboards" class="expandable" style="cursor: zoom-in;" />
   </div>
 
   <!-- BODY -->
@@ -902,6 +902,20 @@
           </div>
 
         </div>
+
+        <div class="gallery-img-wrap" style="margin-top: 16px;">
+          <div class="gallery-info">
+            <div class="gallery-label">Financial Insights</div>
+            <div style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 6px;">85 insights across widgets & notifications</div>
+            <p class="gallery-desc">A new product offering that gives clients the ability to surface personalized insights directly within the user's account experience, delivered as widgets and notifications across 85 unique insight types.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px;">
+            <img src="../images/pfm/insights.png" alt="Financial Insights" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+            <img src="../images/pfm/insightdesign.png" alt="Insight Detail" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+
+      </div>
       </div>
 
 
@@ -1022,7 +1036,7 @@
 
     document.querySelectorAll('.expandable').forEach(img => {
       img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
+        lightboxImg.src = img.dataset.full || img.src;
         currentZoom = 1;
         panX = 0; panY = 0;
         applyTransform();
