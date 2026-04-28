@@ -666,7 +666,7 @@
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="about.html">About</a></li>
-        <li><a href="mailto:nisargp1990@gmail.com">Contact</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-badge">Open to opportunities</div>
     </div>
@@ -681,7 +681,7 @@
     <div class="hero-meta">
       <p>Empowering teams to think strategically and design with purpose.</p>
       <div class="hero-actions">
-        <a href="mailto:nisargp1990@gmail.com" class="btn-primary">Get in touch</a>
+        <a href="#contact" class="btn-primary">Get in touch</a>
         <a href="#" class="btn-secondary">Resume ↓</a>
       </div>
     </div>
@@ -817,8 +817,8 @@
       </div>
 
       <div class="contact-links" style="display: flex; flex-direction: column; gap: 10px; justify-content: center;">
-        <a href="mailto:nisargp1990@gmail.com" class="contact-link">nisargp1990@gmail.com <span>↗</span></a>
-        <a href="https://linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+        <button onclick="copyEmail()" class="contact-link" style="width:100%; text-align:left; cursor:pointer; background:var(--bg); border:1px solid var(--border);">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+        <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
         <a href="#" class="contact-link">Resume <span>↓</span></a>
       </div>
 
@@ -828,6 +828,14 @@
   <footer></footer>
 
   <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+
     function togglePast(row) {
       const cards = document.getElementById('pastCards');
       const btn = row.querySelector('.past-toggle-btn');

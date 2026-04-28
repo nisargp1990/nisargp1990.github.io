@@ -277,7 +277,7 @@
     <div class="nav-links">
       <a href="index.html">Work</a>
       <a href="about.html" class="active">About</a>
-      <a href="mailto:nisargp1990@gmail.com">Contact</a>
+      <a href="#contact">Contact</a>
     </div>
   </nav>
 
@@ -332,6 +332,20 @@
           <div class="exp-period">Jun 2014 – Oct 2018</div>
         </div>
       </div>
+
+      <div class="section-label" style="margin-top: 36px;">Education</div>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-role">M.S. Information Systems</div>
+          <div class="exp-company">New Jersey Institute of Technology</div>
+          <div class="exp-period">2013 – 2014</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">B.S. Business Administration & Management Information Systems</div>
+          <div class="exp-company">State University of New York at Plattsburgh</div>
+          <div class="exp-period">2011 – 2012</div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -341,20 +355,29 @@
     <div class="contact-inner">
       <div>
         <h2>Get in touch</h2>
-        <p>Open to design leadership roles, consulting, and collaborations.</p>
+        <p>Open to design roles, consulting, and collaborations.</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:nisargp1990@gmail.com" class="contact-link">nisargp1990@gmail.com <span>↗</span></a>
-        <a href="https://linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+        <button onclick="copyEmail()" class="contact-link" id="email-btn" style="width:100%; text-align:left; cursor:pointer; background:var(--bg); border:1px solid var(--border);">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+        <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
         <a href="#" class="contact-link">Resume <span>↓</span></a>
       </div>
     </div>
   </div>
 
-  <footer>
+  <footer id="contact">
     <p>© 2025 Nisarg Patel. All rights reserved.</p>
     <p>Built from scratch, no Framer needed.</p>
   </footer>
 
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>

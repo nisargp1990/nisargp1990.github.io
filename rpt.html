@@ -598,6 +598,35 @@
 
     .footer-back:hover { color: var(--accent); }
 
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .outcome-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .outcome-num {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .outcome-label {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 20px 48px;
@@ -688,8 +717,8 @@
     <!-- Sticky nav -->
     <aside class="case-nav">
       <div class="case-nav-label">On this page</div>
-      <a href="#problem">The Problem</a>
       <a href="#role">My Role</a>
+      <a href="#problem">The Problem</a>
       <a href="#strategy">Strategy</a>
       <a href="#research">Research & Testing</a>
       <a href="#outcomes">Outcomes</a>
@@ -697,6 +726,18 @@
 
     <!-- Sections -->
     <div class="case-sections">
+
+      <!-- ROLE -->
+      <div class="case-section" id="role">
+        <div class="section-label">My Role</div>
+        <h2>Director of Product Design</h2>
+        <p class="lead">I led design for a net-new product to fit into the financial app portfolio, working hands-on with engineering and product from early exploration through launch.</p>
+        <ul class="case-list">
+          <li>Led ideation, A/B testing, and concept development across multiple design directions</li>
+          <li>Partnered with engineering to understand API data structure and constraints</li>
+          <li>Collaborated with product to align design decisions to capabilities</li>
+        </ul>
+      </div>
 
       <!-- PROBLEM -->
       <div class="case-section" id="problem">
@@ -712,8 +753,8 @@
         <div class="insight-block">
           <div class="insight-grid">
             <div class="insight-card">
-              <div class="insight-stat">40%</div>
-              <div class="insight-desc">No single view of all recurring charges across aggregated accounts.</div>
+              <div class="insight-stat">41%</div>
+              <div class="insight-desc">41% of consumers feel overwhelmed managing their recurring payments.</div>
             </div>
             <div class="insight-card">
               <div class="insight-stat">2.5×</div>
@@ -727,28 +768,15 @@
         </div>
         <div class="callout" style="margin-top: 20px;">
           <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px;">Business Need</div>
-          <p>Give banks a scalable tool that helps customers take control of recurring spending.</p>
+          <p>Give banks a tool that helps customers eliminate wasted spend and redirects those savings into the broader financial product suite.</p>
         </div>
-      </div>
-
-      <!-- ROLE -->
-      <div class="case-section" id="role">
-        <div class="section-label">My Role</div>
-        <h2>Director of Product Design</h2>
-        <p class="lead">I owned design end to end, from early exploration through final delivery, working closely with engineering and product to shape the experience.</p>
-        <ul class="case-list">
-          <li>Led ideation and concept development across multiple design directions</li>
-          <li>Partnered with engineering to understand API data structure and constraints</li>
-          <li>Collaborated with product to align design decisions to capabilities</li>
-        </ul>
       </div>
 
       <!-- STRATEGY -->
       <div class="case-section" id="strategy">
         <div class="section-label">Strategy</div>
         <h2>Design from the data up</h2>
-        <p class="lead">Before jumping into visuals, I spent time with engineering to understand what data was actually available through the API. That foundation shaped everything, from how merchants were identified to how cancellation flows were structured.</p>
-        <p>With data constraints clear, the team explored multiple concepts iteratively, pressure-testing each against real billing scenarios before committing to a direction. The goal was always to balance functional completeness with an experience that felt simple and trustworthy to the end user.</p>
+        <p class="lead">Before jumping into visuals, I spent time with engineering to understand what data was actually available through the API. That foundation shaped everything, from how merchants were identified (with their logos) to how cancellation flows were structured, and gave the team clear guardrails to explore concepts quickly without designing into dead ends.</p>
 
         <div class="strategy-grid">
           <div class="strategy-card">
@@ -803,7 +831,14 @@
       <div class="case-section" id="outcomes">
         <div class="section-label">Outcomes</div>
         <h2>A tool that turns awareness into action</h2>
-        <p class="lead">The Recurring Payments Tracker gives customers full visibility into their bills in one place, with a clear path to cancel unused subscriptions and redirect savings.</p>
+        <p class="lead">The Recurring Payments Tracker gave customers full visibility into their recurring charges for the first time, and created a natural bridge back into the broader PFM suite. The tool opened a direct path to redirect identified savings into adjacent financial applications like a bank's Savings product — turning subscription awareness into measurable deposit opportunity.</p>
+
+        <div class="outcome-grid" style="grid-template-columns: repeat(1, 1fr); max-width: 280px; margin-bottom: 32px;">
+          <div class="outcome-card">
+            <div class="outcome-num">~70%</div>
+            <div class="outcome-label">of existing clients adopted and integrated the tracker into their app suite</div>
+          </div>
+        </div>
 
         <div class="feature-strip">
 
