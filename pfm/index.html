@@ -656,6 +656,22 @@
     .contact-link:hover { background: var(--surface2); border-color: #ccc; }
     .contact-link span { color: var(--muted); font-size: 13px; }
 
+    .contact-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: fadeUp 0.45s ease both; }
+
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
 
@@ -703,7 +719,12 @@
 
       .before-after-row { grid-template-columns: 1fr; }
 
-      .case-footer-inner { padding: 20px; flex-direction: column; gap: 10px; }
+      .case-hero-inner > div:first-child { text-align: left !important; justify-content: flex-start !important; }
+
+      .case-footer-inner { padding: 16px 20px; gap: 8px; }
+      .footer-next { font-size: 11px !important; max-width: 52%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      .contact-footer-inner { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
 
       footer { padding: 20px; flex-direction: column; gap: 4px; }
     }
@@ -956,12 +977,12 @@
   <div class="case-footer-nav">
     <div class="case-footer-inner">
       <a href="../index.html" class="footer-back">← Back to all work</a>
-      <a href="../rpt/index.html" style="font-size:13px; color: var(--muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Next: Recurring Payments Tracker →</a>
+      <a href="../rpt/index.html" class="footer-next" style="font-size:13px; color: var(--muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">Next: Recurring Payments Tracker →</a>
     </div>
   </div>
 
   <div style="border-top: 1px solid var(--border); background: var(--surface); margin-top: 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+    <div class="contact-footer-inner">
       <div>
         <h3 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px;">Get in touch</h3>
         <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">Open to design roles and networking. Coffee anyone?</p>

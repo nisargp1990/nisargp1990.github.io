@@ -310,6 +310,8 @@
       gap: 10px;
     }
 
+    .contact-links button.contact-link { width: 100%; text-align: left; }
+
     .contact-link {
       display: flex;
       align-items: center;
@@ -338,10 +340,18 @@
     }
 
     /* ── MOBILE ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: fadeUp 0.45s ease both; }
+
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
       .hero { padding: 48px 20px 56px; }
       .content { padding: 0 20px; }
+
+      .hero-meta { justify-content: flex-start; }
 
       .overview-grid { grid-template-columns: 1fr; gap: 36px; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
