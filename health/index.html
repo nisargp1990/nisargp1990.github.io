@@ -457,11 +457,11 @@
       <div style="display:grid; grid-template-columns:1fr 2fr; gap:16px; align-items:start;">
         <div class="screen-card">
           <div class="screen-caption">Discovery &amp; Research</div>
-          <img src="../images/health/discovery.avif" alt="Discovery and research" style="width:100%; display:block;" />
+          <img src="../images/health/discovery.avif" alt="Discovery and research" class="expandable" style="width:100%; display:block; cursor:zoom-in;" />
         </div>
         <div class="screen-card">
           <div class="screen-caption">Information Architecture &amp; Wireframes</div>
-          <img src="../images/health/wireframe.webp" alt="Wireframe and information architecture" style="width:100%; display:block;" />
+          <img src="../images/health/wireframe.webp" alt="Wireframe and information architecture" class="expandable" style="width:100%; display:block; cursor:zoom-in;" />
         </div>
       </div>
     </div>
@@ -478,11 +478,11 @@
       <div class="screens-pair" style="align-items:start;">
         <div class="screen-card">
           <div class="screen-caption">Desktop</div>
-          <img src="../images/health/desktop.avif" alt="Desktop application" style="width:100%; display:block;" />
+          <img src="../images/health/desktop.avif" alt="Desktop application" class="expandable" style="width:100%; display:block; cursor:zoom-in;" />
         </div>
         <div class="screen-card">
           <div class="screen-caption">Mobile</div>
-          <img src="../images/health/mobile.avif" alt="Mobile view" style="width:100%; display:block;" />
+          <img src="../images/health/mobile.avif" alt="Mobile view" class="expandable" style="width:100%; display:block; cursor:zoom-in;" />
         </div>
       </div>
     </div>
@@ -507,6 +507,18 @@
 
   <footer></footer>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <div style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="lbZoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
+      <span id="lb-zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="lbZoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
+      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px;">Close</button>
+    </div>
+  </div>
+
   <script>
     function copyEmail() {
       navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
@@ -515,6 +527,35 @@
         setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
       });
     }
+
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbZoomLabel = document.getElementById('lb-zoom-level');
+    let lbZoom = 1, lbPanX = 0, lbPanY = 0, lbDragging = false, lbSX, lbSY;
+
+    function lbApply() {
+      lbImg.style.transform = `scale(${lbZoom}) translate(${lbPanX/lbZoom}px,${lbPanY/lbZoom}px)`;
+      lbZoomLabel.textContent = Math.round(lbZoom*100)+'%';
+      lbImg.style.cursor = lbZoom > 1 ? (lbDragging ? 'grabbing' : 'grab') : 'default';
+    }
+    function lbZoomIn()  { lbZoom = Math.min(lbZoom+0.25,4); lbApply(); }
+    function lbZoomOut() { lbZoom = Math.max(lbZoom-0.25,0.5); if(lbZoom===1){lbPanX=0;lbPanY=0;} lbApply(); }
+    function closeLightbox() { lb.style.display='none'; lbImg.src=''; lbZoom=1; lbPanX=0; lbPanY=0; lbApply(); }
+
+    lbImg.addEventListener('mousedown', e => { if(lbZoom<=1)return; lbDragging=true; lbSX=e.clientX-lbPanX; lbSY=e.clientY-lbPanY; lbApply(); e.preventDefault(); });
+    document.addEventListener('mousemove', e => { if(!lbDragging)return; lbPanX=e.clientX-lbSX; lbPanY=e.clientY-lbSY; lbApply(); });
+    document.addEventListener('mouseup', () => { if(!lbDragging)return; lbDragging=false; lbApply(); });
+    lbImg.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0?lbZoomIn():lbZoomOut(); }, {passive:false});
+    lb.addEventListener('click', e => { if(e.target===lb) closeLightbox(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbZoom=1; lbPanX=0; lbPanY=0; lbApply();
+        lb.style.display='flex';
+      });
+    });
   </script>
 </body>
 </html>
