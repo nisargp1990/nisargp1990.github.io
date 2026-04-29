@@ -615,7 +615,7 @@
         <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">Open to design roles and networking. Coffee anyone?</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="mailto:nisargp1990@gmail.com" class="contact-link">nisargp1990@gmail.com <span>↗</span></a>
+        <button onclick="copyEmailFooter()" class="contact-link" id="email-footer-btn" style="width:100%; text-align:left; cursor:pointer; background:var(--bg); border:1px solid var(--border);">nisargp1990@gmail.com <span id="email-footer-label">⎘ Copy</span></button>
         <a href="https://linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
         <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
       </div>
@@ -694,6 +694,14 @@
       if (e.key === '+' || e.key === '=') zoomIn();
       if (e.key === '-') zoomOut();
     });
+
+  function copyEmailFooter() {
+    navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+      const label = document.getElementById('email-footer-label');
+      label.textContent = '✓ Copied!';
+      setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+    });
+  }
   </script>
 </body>
 </html>

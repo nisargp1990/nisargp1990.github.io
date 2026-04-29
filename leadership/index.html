@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Leadership — Nisarg Patel</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --accent: #c2410c;
+      --accent-bg: #fff4ee;
+      --accent-border: #fcd9c4;
+      --green: #2d6a4f;
+      --dark: #0f172a;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--dark);
+      padding: 80px 48px 96px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(194,65,12,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .hero-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── SHARED ── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ── DESIGNOPS ── */
+    .designops {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .designops-header {
+      margin-bottom: 48px;
+    }
+
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .ops-card {
+      background: var(--surface);
+      padding: 32px 28px 36px;
+    }
+
+    .ops-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .ops-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .ops-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ops-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .ops-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── MATURITY ── */
+    .maturity {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .maturity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .maturity-text { }
+
+    .maturity-text .section-title { margin-bottom: 20px; }
+
+    .maturity-text .section-body { margin-bottom: 20px; }
+
+    .maturity-img {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .maturity-img img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+
+    .team-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .team-img-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .team-img-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .team-img-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .img-caption {
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── PROCESS ── */
+    .process {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+      align-items: end;
+    }
+
+    .process-images {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .process-img-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-img-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .process-img-wide {
+      grid-column: 1 / -1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-img-wide img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── VALUES ── */
+    .values {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .values-header {
+      margin-bottom: 48px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .value-card {
+      background: var(--surface);
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .value-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .value-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .value-block {
+      margin-bottom: 14px;
+    }
+
+    .value-block-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .value-block-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 64px 0 80px;
+    }
+
+    .contact-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-inner h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .contact-inner p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .contact-link:hover { background: var(--surface2); border-color: #ccc; }
+    .contact-link span { color: var(--muted); font-size: 13px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; }
+
+      .hero { padding: 52px 20px 64px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-photo { display: none; }
+
+      .section-wrap { padding: 0 20px; }
+
+      .designops { padding: 52px 0 48px; }
+      .ops-grid { grid-template-columns: 1fr; }
+
+      .maturity { padding: 52px 0 48px; }
+      .maturity-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .team { padding: 52px 0 48px; }
+      .team-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+      .team-images { grid-template-columns: 1fr; }
+      .team-img-card.wide { grid-column: 1; }
+
+      .process { padding: 52px 0 48px; }
+      .process-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+      .process-images { grid-template-columns: 1fr; }
+
+      .values { padding: 52px 0 48px; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+
+      .contact-section { padding: 48px 0 64px; }
+      .contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
+
+      footer { padding: 20px; flex-direction: column; gap: 4px; }
+    }
+
+    @media (max-width: 540px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Nisarg Patel.</a>
+    <div class="nav-links">
+      <a href="../index.html">Work</a>
+      <a href="../about/index.html">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">Leadership</div>
+        <h1>Design<br/>Leadership</h1>
+        <p class="hero-desc">Aligning user-centered design with business strategy to deliver measurable impact — through people, process, and culture.</p>
+      </div>
+      <div class="hero-photo">
+        <img src="../images/leadership/IMG_4421 2.png" alt="Design Leadership" />
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGNOPS -->
+  <div class="designops">
+    <div class="section-wrap">
+      <div class="designops-header">
+        <div class="section-label">DesignOps Practices</div>
+        <h2 class="section-title">Building the operating system<br/>behind great design</h2>
+        <p class="section-body">DesignOps isn't just tooling or process — it's how a team thinks, works, and creates impact. I organized our practice around three core questions.</p>
+      </div>
+
+      <div class="ops-grid">
+        <div class="ops-card">
+          <div class="ops-card-label">01 — People</div>
+          <div class="ops-card-title">How we work<br/>together</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Organize</div>
+            <div class="ops-pill">Collaborate</div>
+            <div class="ops-pill">Humanize</div>
+          </div>
+        </div>
+        <div class="ops-card">
+          <div class="ops-card-label">02 — Process</div>
+          <div class="ops-card-title">How we get<br/>work done</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Standardize</div>
+            <div class="ops-pill">Harmonize</div>
+            <div class="ops-pill">Prioritize</div>
+          </div>
+        </div>
+        <div class="ops-card">
+          <div class="ops-card-label">03 — Impact</div>
+          <div class="ops-card-title">How we create<br/>impact</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Measure</div>
+            <div class="ops-pill">Socialize</div>
+            <div class="ops-pill">Enable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UX MATURITY -->
+  <div class="maturity">
+    <div class="section-wrap">
+      <div class="maturity-grid">
+        <div class="maturity-text">
+          <div class="section-label">UX Maturity</div>
+          <h2 class="section-title">Understanding where we are to know where to go</h2>
+          <p class="section-body">Understanding the organization's current level of UX maturity provided the insights needed to take targeted steps toward advancing to the next stage.</p>
+          <p class="section-body" style="margin-top: 16px;">The examples below highlight key actions implemented by leadership to drive this growth — from building team structure to socializing design's value across the organization.</p>
+        </div>
+        <div class="maturity-img">
+          <img src="../images/leadership/Frame 36.png" alt="UX Maturity Framework" />
+          <div class="img-caption">UX Maturity Model</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM COMPOSITION -->
+  <div class="team">
+    <div class="section-wrap">
+      <div class="team-header">
+        <div>
+          <div class="section-label">Team Composition</div>
+          <h2 class="section-title">Right skills, right place, right time</h2>
+        </div>
+        <p class="section-body">Understanding specific skills the team has and utilizing them strategically to align with product needs. This allowed the team to develop a method to specialize in design roles — moving from generalists to a team of focused contributors.</p>
+      </div>
+
+      <div class="team-images">
+        <div class="team-img-card">
+          <img src="../images/leadership/roles.png" alt="Design Roles Framework" />
+          <div class="img-caption">Role Specialization</div>
+        </div>
+        <div class="team-img-card">
+          <img src="../images/leadership/skills.png" alt="Skills Mapping" />
+          <div class="img-caption">Skills Mapping</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="process">
+    <div class="section-wrap">
+      <div class="process-header">
+        <div>
+          <div class="section-label">Design Process</div>
+          <h2 class="section-title">Turning creative energy into a predictable, scalable discipline</h2>
+        </div>
+        <p class="section-body">A clear design process ensures quality and alignment across every product surface. We defined shared rituals, decision checkpoints, and artifact standards so the team could move fast without losing coherence.</p>
+      </div>
+
+      <div class="process-images">
+        <div class="process-img-card">
+          <img src="../images/leadership/process.png" alt="Design Process Framework" />
+          <div class="img-caption">Process Framework</div>
+        </div>
+        <div class="process-img-card">
+          <img src="../images/leadership/focuslist.png" alt="Focus & Prioritization" />
+          <div class="img-caption">Focus & Prioritization</div>
+        </div>
+        <div class="process-img-wide">
+          <img src="../images/leadership/sketch.png" alt="Design Exploration" />
+          <div class="img-caption">Design Exploration & Ideation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values">
+    <div class="section-wrap">
+      <div class="values-header">
+        <div class="section-label">Design Values</div>
+        <h2 class="section-title">Turning values into action</h2>
+        <p class="section-body" style="margin-top: 8px;">Culture doesn't happen by accident. These five values shaped how we approached every project, every review, and every conversation.</p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-number">01</div>
+          <div class="value-name">Empathy</div>
+          <div class="value-block">
+            <div class="value-block-label">Why</div>
+            <div class="value-block-text">Understanding teammates and users fosters collaboration and helps create meaningful designs.</div>
+          </div>
+          <div class="value-block">
+            <div class="value-block-label">How</div>
+            <div class="value-block-text">Active listening, open communication, and user-centered approaches in every decision.</div>
+          </div>
+        </div>
+        <div class="value-card">
+          <div class="value-number">02</div>
+          <div class="value-name">Collaboration</div>
+          <div class="value-block">
+            <div class="value-block-label">Why</div>
+            <div class="value-block-text">Great outcomes are often a result of diverse perspectives and team effort.</div>
+          </div>
+          <div class="value-block">
+            <div class="value-block-label">How</div>
+            <div class="value-block-text">Inclusive brainstorming, shared goals, and cross-functional teamwork at every stage.</div>
+          </div>
+        </div>
+        <div class="value-card">
+          <div class="value-number">03</div>
+          <div class="value-name">Creativity &amp; Innovation</div>
+          <div class="value-block">
+            <div class="value-block-label">Why</div>
+            <div class="value-block-text">Staying ahead in design means constantly challenging the status quo.</div>
+          </div>
+          <div class="value-block">
+            <div class="value-block-label">How</div>
+            <div class="value-block-text">Space for experimentation, celebrating unconventional thinking, and supporting risk-taking.</div>
+          </div>
+        </div>
+        <div class="value-card">
+          <div class="value-number">04</div>
+          <div class="value-name">Ownership Mindset</div>
+          <div class="value-block">
+            <div class="value-block-label">Why</div>
+            <div class="value-block-text">A culture of responsibility and adaptability drives long-term success and innovation.</div>
+          </div>
+          <div class="value-block">
+            <div class="value-block-label">How</div>
+            <div class="value-block-text">Embrace experimentation, celebrate learning from mistakes, and invest in growth.</div>
+          </div>
+        </div>
+        <div class="value-card">
+          <div class="value-number">05</div>
+          <div class="value-name">Focus on Impact</div>
+          <div class="value-block">
+            <div class="value-block-label">Why</div>
+            <div class="value-block-text">Teams are more motivated when their efforts create meaningful value for users and the business.</div>
+          </div>
+          <div class="value-block">
+            <div class="value-block-label">How</div>
+            <div class="value-block-text">Connect daily work to broader goals, communicate outcomes regularly, and celebrate wins.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="section-wrap">
+      <div class="contact-inner">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Open to design roles and networking. Coffee anyone?</p>
+        </div>
+        <div class="contact-links">
+          <button onclick="copyEmail()" class="contact-link" id="email-btn" style="width:100%; text-align:left; cursor:pointer;">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+          <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+          <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
