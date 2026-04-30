@@ -467,7 +467,60 @@
 
       footer { padding: 20px; flex-direction: column; gap: 4px; }
     }
-  </style>
+  
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── MICRO-INTERACTIONS ── */
+    /* Expandable image hover */
+    img.expandable { transition: transform 0.3s ease, opacity 0.3s ease; }
+    img.expandable:hover { transform: scale(1.015); opacity: 0.92; }
+
+    /* Section label slide-in */
+    .section-label, .hero-label {
+      display: inline-flex;
+      overflow: hidden;
+    }
+
+    /* Nav link animated underline */
+    .nav-links a, .case-nav a {
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Footer-back / footer-next hover color */
+    .footer-back { transition: color 0.2s, gap 0.2s; }
+
+    /* Stat card number scale on reveal */
+    .stat-num, .hero-stat-num {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in .stat-num, .reveal.in .hero-stat-num { transform: none; }
+
+    /* Ops/value/step card subtle border glow on hover */
+    .ops-card, .value-card, .step, .step-card, .strategy-card, .bento-item {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .ops-card:hover, .value-card:hover, .step:hover, .step-card:hover,
+    .strategy-card:hover, .bento-item:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+</style>
 </head>
 <body>
 
@@ -729,5 +782,68 @@
     });
   }
   </script>
+  <script>
+  /* scroll-reveal-init */
+  (function() {
+    setTimeout(function() {
+      var sel = [
+        '.project-card','.ops-card','.value-card','.step','.step-card',
+        '.strategy-card','.bento-item','.exp-item','.contact-inner',
+        '.role-card','.outcome-stat-card','.maturity-grid','.team-images',
+        '.overview-grid','.screens-grid','.screens-row',
+        '.outcome-layout','.section-img','.section-img-row','.before-after-row',
+        '.outcome-grid','.role-block','.approach-header','.work-header',
+        '.outcomes-header','.designops-header','.values-header','.team-header',
+        '.callout','.insight-block'
+      ].join(',');
+      var items = document.querySelectorAll(sel);
+      items.forEach(function(el) { el.classList.add('reveal'); });
+
+      ['.projects-grid','.ops-grid','.values-grid','.steps-grid',
+       '.past-grid','.bento-grid','.strategy-grid','.outcome-grid',
+       '.team-images','.section-img-row',
+       '.case-hero-stats','.hero-actions'].forEach(function(g) {
+        document.querySelectorAll(g).forEach(function(grid) {
+          Array.from(grid.children).forEach(function(c, i) {
+            c.style.transitionDelay = (i * 0.1) + 's';
+          });
+        });
+      });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+      items.forEach(function(el) { io.observe(el); });
+
+      // Stat count-up
+      document.querySelectorAll('.hero-stat-num, .stat-num').forEach(function(el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/^([^0-9]*)(\d+(?:\.\d+)?)(.*)$/);
+        if (!m || parseFloat(m[2]) === 0) return;
+        var pre = m[1], numStr = m[2], suf = m[3];
+        var target = parseFloat(numStr);
+        var dec = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+        var fired = false;
+        var cio = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (!e.isIntersecting || fired) return;
+            fired = true; cio.unobserve(e.target);
+            var t0 = performance.now(), dur = 950;
+            (function tick(now) {
+              var p = Math.min((now - t0) / dur, 1);
+              var v = target * (1 - Math.pow(1 - p, 3));
+              el.textContent = pre + v.toFixed(dec) + suf;
+              if (p < 1) requestAnimationFrame(tick);
+            })(t0);
+          });
+        }, { threshold: 0.6 });
+        cio.observe(el);
+      });
+    }, 460);
+  })();
+  </script>
+
 </body>
 </html>
