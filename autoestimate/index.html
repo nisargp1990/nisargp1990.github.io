@@ -337,21 +337,22 @@
       max-width: 600px;
     }
 
-    .outcome-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-
     .outcome-stat-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+      padding: 32px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .outcome-stat-card {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+        gap: 24px;
+      }
     }
 
     .stat-item {}
@@ -450,9 +451,7 @@
       .screens-grid { grid-template-columns: 1fr; }
       .screens-row { grid-template-columns: 1fr; }
 
-      .outcome-layout { grid-template-columns: 1fr; gap: 32px; }
-
-      .contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
+.contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
       footer { padding: 20px; }
     }
 
@@ -470,8 +469,8 @@
 
     /* ── MICRO-INTERACTIONS ── */
     /* Expandable image hover */
-    img.expandable { transition: transform 0.3s ease, opacity 0.3s ease; }
-    img.expandable:hover { transform: scale(1.015); opacity: 0.92; }
+    img.expandable { transition: transform 0.3s ease; }
+    img.expandable:hover { transform: scale(1.015); }
 
     /* Section label slide-in */
     .section-label, .hero-label {
@@ -615,29 +614,16 @@
         <p>From early sketches to production-ready screens — designing a flow that works in a parking lot, in bad lighting, with shaky hands.</p>
       </div>
 
-      <div class="screens-grid" style="margin-bottom: 16px;">
+      <div class="screens-grid">
         <div class="screen-block">
           <div class="screen-caption">Early Sketches</div>
-          <img src="../images/mobileestimate/sketch.avif" alt="Early concept sketches" class="expandable" style="cursor: zoom-in;" />
+          <img src="../images/mobileestimate/sketch.avif" alt="Early concept sketches" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
         </div>
-        <div class="screen-block">
-          <div class="screen-caption">Claim Search</div>
-          <img src="../images/mobileestimate/claimsearch.avif" alt="Claim search screen" class="expandable" style="cursor: zoom-in;" />
-        </div>
-      </div>
-
-      <div class="screens-row">
-        <div class="screen-block">
-          <div class="screen-caption">Claim Flow</div>
-          <img src="../images/mobileestimate/claimflow.avif" alt="Claim submission flow" class="expandable" style="cursor: zoom-in;" />
-        </div>
-        <div class="screen-block">
-          <div class="screen-caption">Estimate Review</div>
-          <img src="../images/mobileestimate/claimestimate.avif" alt="Claim estimate review" class="expandable" style="cursor: zoom-in;" />
-        </div>
-        <div class="screen-block">
-          <div class="screen-caption">Final Output</div>
-          <img src="../images/mobileestimate/carimage.avif" alt="Vehicle damage estimate" class="expandable" style="cursor: zoom-in;" />
+        <div class="screen-block" style="display: flex; align-items: center; justify-content: center;">
+          <div style="width: 68%; display: flex; flex-direction: column; align-items: center;">
+            <div class="screen-caption" style="align-self: flex-start;">Guided Photo Capture</div>
+            <img src="../images/mobileestimate/carimage.png" alt="Guided photo capture" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
         </div>
       </div>
     </div>
@@ -651,24 +637,39 @@
         <h2>Back on the road in hours, not days</h2>
         <p>The guided photo capture process gave adjusters everything they needed to assess damage remotely — eliminating back-and-forth and dramatically compressing cycle time.</p>
       </div>
-      <div class="outcome-layout">
-        <div class="outcome-stat-card">
-          <div class="stat-item">
-            <div class="stat-num">&lt;3 hrs</div>
-            <div class="stat-label">Claim turnaround time, down from 4+ business days</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">4+ days</div>
-            <div class="stat-label">Previous average claim resolution time</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">Zero</div>
-            <div class="stat-label">Calls to a claims adjuster required for photo submission</div>
+      <div class="outcome-stat-card" style="margin-bottom: 40px;">
+        <div class="stat-item">
+          <div class="stat-num">&lt;3 hrs</div>
+          <div class="stat-label">Claim turnaround time, down from 4+ business days</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4+ days</div>
+          <div class="stat-label">Previous average claim resolution time</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">Zero</div>
+          <div class="stat-label">Calls to a claims adjuster required for photo submission</div>
+        </div>
+      </div>
+
+      <div class="screens-row" style="gap: 32px;">
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Claim Search</div>
+            <img src="../images/mobileestimate/claimsearch.avif" alt="Claim search screen" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
           </div>
         </div>
-        <div>
-          <div class="screen-caption">Vehicle Damage Output</div>
-          <img src="../images/mobileestimate/carimage.avif" alt="Vehicle damage estimate output" class="expandable" style="width: 100%; display: block; cursor: zoom-in;" />
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Claim Flow</div>
+            <img src="../images/mobileestimate/claimflow.avif" alt="Claim submission flow" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Estimate Review</div>
+            <img src="../images/mobileestimate/claimestimate.avif" alt="Claim estimate review" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
         </div>
       </div>
     </div>
