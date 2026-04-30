@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisarg — Product Design</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --accent: #c2410c;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    body { animation: fadeIn 0.4s ease both; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left { display: flex; align-items: center; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5ee;
+      border: 1px solid #b7dfc7;
+      color: #2d6a4f;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .nav-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #2d6a4f;
+      border-radius: 50%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+      padding: 72px 48px 80px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .overview h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .overview p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .role-item-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .role-item-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .role-item-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── APPROACH ── */
+    .approach {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .approach-header {
+      margin-bottom: 48px;
+    }
+
+    .approach-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .approach-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--surface);
+      padding: 28px 24px;
+    }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .step-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── WORK ── */
+    .work {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-header {
+      margin-bottom: 48px;
+    }
+
+    .work-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .work-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .work-section {
+      margin-bottom: 56px;
+    }
+
+    .work-section:last-child { margin-bottom: 0; }
+
+    .work-section-header {
+      margin-bottom: 20px;
+    }
+
+    .work-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .work-section-body {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .img-placeholder.tall { height: 340px; }
+    .img-placeholder.short { height: 220px; }
+
+    .screen-caption {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .screens-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .screens-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* ── OUTCOMES ── */
+    .outcomes {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .outcomes-header {
+      margin-bottom: 40px;
+    }
+
+    .outcomes-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .outcomes-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .outcome-card {
+      background: var(--surface);
+      padding: 32px 28px;
+    }
+
+    .outcome-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .outcome-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .outcome-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 72px 0 80px;
+    }
+
+    .contact-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-inner h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .contact-inner p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .contact-link:hover { background: var(--surface2); border-color: #ccc; }
+    .contact-link span { color: var(--muted); font-size: 13px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-badge { display: none; }
+      .hero { padding: 48px 20px 56px; }
+      .content { padding: 0 20px; }
+      .hero-meta { justify-content: flex-start; }
+      .overview-grid { grid-template-columns: 1fr; gap: 36px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .screens-row { grid-template-columns: 1fr; }
+      .screens-row-3 { grid-template-columns: 1fr; }
+      .outcome-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
+      footer { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── MICRO-INTERACTIONS ── */
+    img.expandable { transition: transform 0.3s ease; }
+    img.expandable:hover { transform: scale(1.015); }
+
+    .nav-links a {
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .step, .outcome-card {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .step:hover, .outcome-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html" class="nav-logo">Nisarg Patel.</a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Work</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-badge">Open to opportunities</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="hero-tag">Fintech</span>
+        <div class="hero-dot"></div>
+        <span class="hero-tag">Envestnet</span>
+        <div class="hero-dot"></div>
+        <span class="hero-tag">B2B · 2022–2025</span>
+      </div>
+      <h1>Client Portal</h1>
+      <p class="hero-desc">A modular, widget-based wealth management portal giving advisors and their clients a single, cohesive view of their entire financial lives — tested with real users and anchored in a scalable design system.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <div class="content">
+      <div class="overview-grid">
+        <div>
+          <div class="section-label">The Problem</div>
+          <h2>One view for an entire financial life</h2>
+          <p>Advisors needed a way to show their value to clients in real time — but the existing experience was fragmented across accounts, lacked customization, and made it difficult to surface the insights that matter most.</p>
+          <p>The challenge was designing a portal that felt personalized for each client, while remaining flexible and maintainable across an enterprise-scale platform.</p>
+        </div>
+        <div class="role-card">
+          <div>
+            <div class="role-item-label">My Role</div>
+            <div class="role-item-value">Lead Designer</div>
+            <div class="role-item-sub">With one junior designer</div>
+          </div>
+          <div>
+            <div class="role-item-label">Company</div>
+            <div class="role-item-value">Envestnet · Yodlee</div>
+            <div class="role-item-sub">Fintech · Enterprise B2B</div>
+          </div>
+          <div>
+            <div class="role-item-label">Timeline</div>
+            <div class="role-item-value">2022–2025</div>
+          </div>
+          <div>
+            <div class="role-item-label">Platform</div>
+            <div class="role-item-value">Web · Responsive</div>
+            <div class="role-item-sub">7–10 breakpoints across devices</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <div class="approach">
+    <div class="content">
+      <div class="approach-header">
+        <div class="section-label">Approach</div>
+        <h2>Research-led, system-first</h2>
+        <p>I grounded the design in competitive analysis of modern financial platforms, validated key decisions with moderated user testing, and ensured every component contributed back to the design system.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Competitive Research</div>
+          <div class="step-body">Studied modern financial platforms to define a framework for presenting data-heavy information in a single, scannable view — informing the widget-based dashboard architecture.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Moderated User Testing</div>
+          <div class="step-body">Ran Maze-facilitated sessions with 3 financial advisors, testing the dashboard's add-widget feature and the realized gain/loss page to uncover friction and validate design decisions.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Widget System Design</div>
+          <div class="step-body">Designed the modular widget experience end-to-end — including previews and contextual guidance — which was later formalized into the design system and adopted across multiple products.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">System & Standards</div>
+          <div class="step-body">Defined dark mode information color standards for accessibility and established 7–10 responsive breakpoints to give engineering a clear, scalable implementation framework.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE WORK -->
+  <div class="work">
+    <div class="content">
+      <div class="work-header">
+        <div class="section-label">The Work</div>
+        <h2>From testing insights to shipped product</h2>
+        <p>Each section of the portal was shaped by direct user feedback. Testing surfaced the gaps; design closed them.</p>
+      </div>
+
+      <!-- Dashboard & Widgets -->
+      <div class="work-section">
+        <div class="work-section-header">
+          <div class="section-label">Dashboard · Widget Experience</div>
+          <div class="work-section-title">Contextual widget placement with preview</div>
+          <p class="work-section-body">User testing revealed that advisors struggled to understand what a widget would look like before placing it on the dashboard. We tested two models — drag and drop vs. a curated widget list — and found that a list with contextual descriptions and a live preview reduced errors and increased confidence. The widget experience was later added to the design system and used by other designers across different products.</p>
+        </div>
+        <div class="screen-caption">Dashboard · Add Widget Flow</div>
+        <div class="img-placeholder tall">Images coming soon</div>
+      </div>
+
+      <!-- Realized Gain/Loss -->
+      <div class="work-section">
+        <div class="work-section-header">
+          <div class="section-label">Realized Gain/Loss</div>
+          <div class="work-section-title">Column rearrangement based on advisor feedback</div>
+          <p class="work-section-body">Testing the realized gain/loss page with advisors revealed that the existing column order didn't match how they mentally process client data. We rearranged the columns based on their feedback — prioritizing the fields they reach for first — making the page faster to scan and act on.</p>
+        </div>
+        <div class="screen-caption">Realized Gain/Loss · Before & After</div>
+        <div class="screens-row">
+          <div>
+            <div class="img-placeholder tall">Before — Images coming soon</div>
+          </div>
+          <div>
+            <div class="img-placeholder tall">After — Images coming soon</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design System -->
+      <div class="work-section">
+        <div class="work-section-header">
+          <div class="section-label">Design System</div>
+          <div class="work-section-title">Dark mode color standards & accessibility</div>
+          <p class="work-section-body">I defined the dark mode information colors for the design system, ensuring all data visualizations and financial indicators met accessibility contrast standards. These tokens were documented and handed off to engineering with clear usage guidelines.</p>
+        </div>
+        <div class="screen-caption">Dark Mode · Color System</div>
+        <div class="img-placeholder short">Images coming soon</div>
+      </div>
+
+      <!-- Responsive -->
+      <div class="work-section">
+        <div class="work-section-header">
+          <div class="section-label">Responsive Guidelines</div>
+          <div class="work-section-title">7–10 breakpoints for engineering</div>
+          <p class="work-section-body">I defined the responsive guidelines for the portal, specifying 7–10 breakpoints that covered everything from widescreen advisor workstations to tablet-sized client views. This gave engineering a clear, unambiguous reference and reduced back-and-forth during implementation.</p>
+        </div>
+        <div class="screen-caption">Responsive Breakpoints</div>
+        <div class="img-placeholder short">Images coming soon</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes">
+    <div class="content">
+      <div class="outcomes-header">
+        <div class="section-label">Outcomes</div>
+        <h2>Shipped, systemized, and scaled</h2>
+        <p>The work extended beyond the portal itself — contributing foundational components and standards to the broader design system.</p>
+      </div>
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <div class="outcome-icon">🧩</div>
+          <div class="outcome-title">Widget system adopted platform-wide</div>
+          <div class="outcome-body">The widget design experience was formalized into the design system and used by other designers across different Envestnet products.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">♿</div>
+          <div class="outcome-title">Accessible dark mode standards</div>
+          <div class="outcome-body">Defined information color tokens for dark mode ensuring WCAG-compliant contrast across all data-heavy financial views.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">📐</div>
+          <div class="outcome-title">Responsive framework for engineering</div>
+          <div class="outcome-body">7–10 breakpoints documented and handed off, giving engineering a clear implementation path across all device sizes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="content">
+      <div class="contact-inner">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Open to design roles and networking. Coffee anyone?</p>
+        </div>
+        <div class="contact-links">
+          <button onclick="copyEmail()" class="contact-link" id="email-btn">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+          <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+          <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <div style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="lbZoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
+      <span id="lb-zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="lbZoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
+      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px;">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbZoomLabel = document.getElementById('lb-zoom-level');
+    let lbZoom = 1, lbPanX = 0, lbPanY = 0, lbDragging = false, lbSX, lbSY;
+
+    function lbApply() {
+      lbImg.style.transform = `scale(${lbZoom}) translate(${lbPanX/lbZoom}px,${lbPanY/lbZoom}px)`;
+      lbZoomLabel.textContent = Math.round(lbZoom*100)+'%';
+      lbImg.style.cursor = lbZoom > 1 ? (lbDragging ? 'grabbing' : 'grab') : 'default';
+    }
+    function lbZoomIn()  { lbZoom = Math.min(lbZoom+0.25,4); lbApply(); }
+    function lbZoomOut() { lbZoom = Math.max(lbZoom-0.25,0.5); if(lbZoom===1){lbPanX=0;lbPanY=0;} lbApply(); }
+    function closeLightbox() { lb.style.display='none'; lbImg.src=''; lbZoom=1; lbPanX=0; lbPanY=0; lbApply(); }
+
+    lb.addEventListener('click', e => { if(e.target===lb) closeLightbox(); });
+    lb.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0 ? lbZoomIn() : lbZoomOut(); }, {passive:false});
+    lbImg.addEventListener('mousedown', e => { lbDragging=true; lbSX=e.clientX-lbPanX; lbSY=e.clientY-lbPanY; lbApply(); });
+    window.addEventListener('mousemove', e => { if(!lbDragging) return; lbPanX=e.clientX-lbSX; lbPanY=e.clientY-lbSY; lbApply(); });
+    window.addEventListener('mouseup', () => { lbDragging=false; lbApply(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lb.style.display = 'flex';
+        lbImg.src = img.dataset.full || img.src;
+        lbZoom=1; lbPanX=0; lbPanY=0; lbApply();
+      });
+    });
+  </script>
+  <script>
+  /* scroll-reveal-init */
+  (function() {
+    setTimeout(function() {
+      var sel = [
+        '.step','.outcome-card','.contact-inner',
+        '.role-card','.overview-grid','.approach-header',
+        '.work-header','.outcomes-header','.work-section'
+      ].join(',');
+      var items = document.querySelectorAll(sel);
+      items.forEach(function(el) { el.classList.add('reveal'); });
+
+      ['.steps-grid','.outcome-grid','.screens-row','.screens-row-3'].forEach(function(g) {
+        document.querySelectorAll(g).forEach(function(grid) {
+          Array.from(grid.children).forEach(function(c, i) {
+            c.style.transitionDelay = (i * 0.1) + 's';
+          });
+        });
+      });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+      items.forEach(function(el) { io.observe(el); });
+    }, 460);
+  })();
+  </script>
+
+</body>
+</html>
