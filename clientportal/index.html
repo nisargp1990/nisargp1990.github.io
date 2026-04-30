@@ -16,6 +16,9 @@
       --text: #1a1814;
       --muted: #5e5b56;
       --accent: #c2410c;
+      --accent-bg: #fff4ee;
+      --accent-border: #fcd9c4;
+      --green: #2d6a4f;
       --radius: 14px;
       --font: 'Satoshi', system-ui, sans-serif;
     }
@@ -29,13 +32,8 @@
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    body { animation: fadeIn 0.4s ease both; }
 
     /* ── NAV ── */
     nav {
@@ -76,6 +74,7 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
 
     .nav-badge {
       display: flex;
@@ -97,368 +96,445 @@
     }
 
     /* ── HERO ── */
-    .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
-      padding: 72px 48px 80px;
+    .case-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      padding: 40px 48px 220px;
     }
 
-    .hero-inner {
+    .case-hero-inner {
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .hero-dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-    }
-
-    .hero h1 {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    .hero-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-      max-width: 560px;
-    }
-
-    /* ── CONTENT ── */
-    .content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--accent);
-      margin-bottom: 14px;
-    }
-
-    /* ── OVERVIEW ── */
-    .overview {
-      padding: 72px 0 64px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .overview h2 {
-      font-size: clamp(22px, 2.5vw, 30px);
+    .case-hero h1 {
+      font-size: clamp(28px, 3.5vw, 46px);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.2;
-      margin-bottom: 16px;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 720px;
+      margin-bottom: 12px;
     }
 
-    .overview p {
+    .case-hero-subtitle {
       font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 600px;
+      line-height: 1.65;
+      margin-bottom: 0;
     }
 
-    .role-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
+    .case-hero-stats {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 48px;
+      margin-top: 28px;
+      flex-wrap: wrap;
     }
 
-    .role-item-label {
-      font-size: 10px;
+    .hero-stat-num {
+      font-size: 32px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+      letter-spacing: -0.04em;
+      color: #fff;
+      line-height: 1;
       margin-bottom: 4px;
     }
 
-    .role-item-value {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .role-item-sub {
+    .hero-stat-label {
       font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
     }
 
-    /* ── APPROACH ── */
-    .approach {
-      padding: 72px 0 64px;
-      border-bottom: 1px solid var(--border);
+    /* ── COVER IMAGE ── */
+    .case-cover {
+      max-width: 1200px;
+      margin: -220px auto 0;
+      padding: 0 48px;
     }
 
-    .approach-header {
-      margin-bottom: 48px;
-    }
-
-    .approach-header h2 {
-      font-size: clamp(22px, 2.5vw, 30px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .approach-header p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 600px;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      background: var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    .step {
-      background: var(--surface);
-      padding: 28px 24px;
-    }
-
-    .step-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .step-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .step-body {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ── WORK ── */
-    .work {
-      padding: 72px 0 64px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .work-header {
-      margin-bottom: 48px;
-    }
-
-    .work-header h2 {
-      font-size: clamp(22px, 2.5vw, 30px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .work-header p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 600px;
-    }
-
-    .work-section {
-      margin-bottom: 56px;
-    }
-
-    .work-section:last-child { margin-bottom: 0; }
-
-    .work-section-header {
-      margin-bottom: 20px;
-    }
-
-    .work-section-title {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .work-section-body {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 680px;
-    }
-
-    .img-placeholder {
+    .case-cover img {
       width: 100%;
-      background: var(--surface);
-      border: 1px dashed var(--border);
       border-radius: var(--radius);
+      display: block;
+    }
+
+    .case-cover-placeholder {
+      width: 100%;
+      border-radius: var(--radius);
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.08);
+      height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
+      color: rgba(255,255,255,0.25);
       font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
-    .img-placeholder.tall { height: 340px; }
-    .img-placeholder.short { height: 220px; }
+    /* ── BODY LAYOUT ── */
+    .case-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 48px 96px;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
 
-    .screen-caption {
-      font-size: 12px;
-      font-weight: 600;
+    .case-nav {
+      position: sticky;
+      top: 80px;
+    }
+
+    .case-nav-label {
+      font-size: 10px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       color: var(--muted);
       margin-bottom: 10px;
-      margin-top: 20px;
     }
 
-    .screens-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: start;
+    .case-nav a {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 5px 0 5px 12px;
+      border-left: 2px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
     }
 
-    .screens-row-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      align-items: start;
+    .case-nav a:hover { color: var(--text); border-color: var(--accent); }
+    .case-nav a.active { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+
+    /* ── SECTIONS ── */
+    .case-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    /* ── OUTCOMES ── */
-    .outcomes {
-      padding: 72px 0 64px;
-      border-bottom: 1px solid var(--border);
+    .case-section {
+      scroll-margin-top: 80px;
+      padding: 28px 0 32px;
     }
 
-    .outcomes-header {
-      margin-bottom: 40px;
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 18px;
     }
 
-    .outcomes-header h2 {
-      font-size: clamp(22px, 2.5vw, 30px);
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .case-section h2 {
+      font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.03em;
-      margin-bottom: 12px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      color: var(--text);
     }
 
-    .outcomes-header p {
+    .case-section p {
       font-size: 16px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 600px;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 12px;
+      max-width: 680px;
     }
 
-    .outcome-grid {
+    .case-section p:last-child { margin-bottom: 0; }
+
+    .lead {
+      font-size: 16px !important;
+      color: var(--text) !important;
+      font-weight: 500;
+      line-height: 1.75 !important;
+      margin-bottom: 14px !important;
+    }
+
+    .section-img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+      margin: 24px 0;
+    }
+
+    .section-img-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .section-img-row img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    /* Callout */
+    .callout {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .callout p {
+      font-size: 15px;
+      color: var(--text);
+      margin: 0;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    /* Lists */
+    .case-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 14px 0;
+      counter-reset: list-counter;
+    }
+
+    .case-list li {
+      display: flex;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.65;
+      padding: 6px 0;
+      counter-increment: list-counter;
+      align-items: baseline;
+    }
+
+    .case-list li::before {
+      content: counter(list-counter, decimal-leading-zero);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .problem-list { counter-reset: none; }
+    .problem-list li::before {
+      content: '⊘';
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--accent);
+      counter-increment: none;
+      padding-top: 0;
+    }
+
+    /* Strategy cards */
+    .strategy-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--border);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .strategy-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      overflow: hidden;
+      padding: 20px;
+    }
+
+    .strategy-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .strategy-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 7px;
+    }
+
+    .strategy-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Outcome stats */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
     }
 
     .outcome-card {
       background: var(--surface);
-      padding: 32px 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
     }
 
-    .outcome-icon {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .outcome-title {
-      font-size: 16px;
+    .outcome-num {
+      font-size: 36px;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
     }
 
-    .outcome-body {
-      font-size: 14px;
+    .outcome-label {
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
-    /* ── CONTACT ── */
-    .contact-section {
-      padding: 72px 0 80px;
-    }
-
-    .contact-inner {
+    /* Gallery */
+    .gallery-img-wrap {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .contact-inner h2 {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .contact-inner p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .contact-links {
+      overflow: hidden;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      margin-bottom: 4px;
     }
+
+    .gallery-info {
+      padding: 14px 14px 12px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    }
+
+    .gallery-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .gallery-desc {
+      font-size: 14px !important;
+      color: rgba(255,255,255,0.85) !important;
+      line-height: 1.3 !important;
+      margin: 0 !important;
+    }
+
+    .gallery-img-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      min-height: 280px;
+    }
+
+    .gallery-placeholder.tall { min-height: 400px; }
+
+    /* Before / After */
+    .before-after-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .before-after-item { display: flex; flex-direction: column; gap: 8px; }
+
+    .before-after-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+
+    .label-before {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    .label-after {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .before-after-item img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
+    .case-footer-nav {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .case-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-back {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-back:hover { color: var(--accent); }
 
     .contact-link {
       display: flex;
@@ -472,39 +548,53 @@
       color: var(--text);
       font-size: 14px;
       font-weight: 500;
-      font-family: var(--font);
       transition: background 0.2s, border-color 0.2s;
-      cursor: pointer;
     }
-
     .contact-link:hover { background: var(--surface2); border-color: #ccc; }
     .contact-link span { color: var(--muted); font-size: 13px; }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 20px 48px;
+    .contact-footer-inner {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
     }
 
-    /* ── MOBILE ── */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    body { animation: fadeIn 0.4s ease both; }
+
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
       .nav-badge { display: none; }
-      .hero { padding: 48px 20px 56px; }
-      .content { padding: 0 20px; }
-      .hero-meta { justify-content: flex-start; }
-      .overview-grid { grid-template-columns: 1fr; gap: 36px; }
-      .steps-grid { grid-template-columns: 1fr 1fr; }
-      .screens-row { grid-template-columns: 1fr; }
-      .screens-row-3 { grid-template-columns: 1fr; }
-      .outcome-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
-      footer { padding: 20px; }
-    }
 
-    @media (max-width: 480px) {
-      .steps-grid { grid-template-columns: 1fr; }
+      .case-hero { padding: 28px 20px 100px; }
+      .case-hero-stats { gap: 24px; flex-wrap: wrap; }
+      .case-cover { margin: -100px auto 0; padding: 0 20px; }
+      .case-cover-placeholder { height: 240px; }
+
+      .case-body {
+        grid-template-columns: 1fr;
+        padding: 32px 20px 64px;
+        gap: 0;
+      }
+
+      .case-nav { display: none; }
+
+      .strategy-grid { grid-template-columns: 1fr; }
+      .outcome-grid { grid-template-columns: 1fr 1fr; }
+      .section-img-row { grid-template-columns: 1fr; }
+      .before-after-row { grid-template-columns: 1fr; }
+
+      .case-footer-inner { padding: 16px 20px; gap: 8px; }
+      .footer-next { font-size: 11px !important; max-width: 52%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      .contact-footer-inner { grid-template-columns: 1fr !important; padding: 28px 20px !important; gap: 24px !important; }
     }
 
     /* ── SCROLL REVEAL ── */
@@ -519,9 +609,7 @@
     img.expandable { transition: transform 0.3s ease; }
     img.expandable:hover { transform: scale(1.015); }
 
-    .nav-links a {
-      position: relative;
-    }
+    .nav-links a, .case-nav a { position: relative; }
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -532,10 +620,18 @@
     }
     .nav-links a:hover::after { width: 100%; }
 
-    .step, .outcome-card {
+    .footer-back { transition: color 0.2s; }
+
+    .hero-stat-num {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in .hero-stat-num { transform: none; }
+
+    .strategy-card, .outcome-card {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
-    .step:hover, .outcome-card:hover {
+    .strategy-card:hover, .outcome-card:hover {
       box-shadow: 0 4px 20px rgba(0,0,0,0.07);
       transform: translateY(-2px);
     }
@@ -543,6 +639,7 @@
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <div class="nav-left">
       <a href="../" class="nav-logo">Nisarg Patel.</a>
@@ -558,260 +655,290 @@
   </nav>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-meta">
-        <span class="hero-tag">Fintech</span>
-        <div class="hero-dot"></div>
-        <span class="hero-tag">Envestnet</span>
-        <div class="hero-dot"></div>
-        <span class="hero-tag">B2B · 2022–2025</span>
+  <div class="case-hero">
+    <div class="case-hero-inner">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Fintech</span>
+        <div style="width:3px; height:3px; border-radius:50%; background:rgba(255,255,255,0.3);"></div>
+        <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5);">Envestnet</span>
+        <div style="width:3px; height:3px; border-radius:50%; background:rgba(255,255,255,0.3);"></div>
+        <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5);">B2B</span>
       </div>
       <h1>Client Portal</h1>
-      <p class="hero-desc">A modular, widget-based wealth management portal giving advisors and their clients a single, cohesive view of their entire financial lives — tested with real users and anchored in a scalable design system.</p>
-    </div>
-  </div>
-
-  <!-- OVERVIEW -->
-  <div class="overview">
-    <div class="content">
-      <div class="overview-grid">
+      <p class="case-hero-subtitle">A modular, widget-based wealth management portal giving advisors and their clients a single, cohesive view of their entire financial lives — validated through moderated user testing and grounded in a scalable design system.</p>
+      <div class="case-hero-stats">
         <div>
-          <div class="section-label">The Problem</div>
-          <h2>One view for an entire financial life</h2>
-          <p>Advisors needed a way to show their value to clients in real time — but the existing experience was fragmented across accounts, lacked customization, and made it difficult to surface the insights that matter most.</p>
-          <p>The challenge was designing a portal that felt personalized for each client, while remaining flexible and maintainable across an enterprise-scale platform.</p>
+          <div class="hero-stat-num">7–10</div>
+          <div class="hero-stat-label">Responsive breakpoints defined</div>
         </div>
-        <div class="role-card">
-          <div>
-            <div class="role-item-label">My Role</div>
-            <div class="role-item-value">Lead Designer</div>
-            <div class="role-item-sub">With one junior designer</div>
-          </div>
-          <div>
-            <div class="role-item-label">Company</div>
-            <div class="role-item-value">Envestnet · Yodlee</div>
-            <div class="role-item-sub">Fintech · Enterprise B2B</div>
-          </div>
-          <div>
-            <div class="role-item-label">Timeline</div>
-            <div class="role-item-value">2022–2025</div>
-          </div>
-          <div>
-            <div class="role-item-label">Platform</div>
-            <div class="role-item-value">Web · Responsive</div>
-            <div class="role-item-sub">7–10 breakpoints across devices</div>
-          </div>
+        <div>
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Advisors in moderated testing</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1</div>
+          <div class="hero-stat-label">Widget system added to design system</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- APPROACH -->
-  <div class="approach">
-    <div class="content">
-      <div class="approach-header">
-        <div class="section-label">Approach</div>
-        <h2>Research-led, system-first</h2>
-        <p>I grounded the design in competitive analysis of modern financial platforms, validated key decisions with moderated user testing, and ensured every component contributed back to the design system.</p>
-      </div>
-      <div class="steps-grid">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-title">Competitive Research</div>
-          <div class="step-body">Studied modern financial platforms to define a framework for presenting data-heavy information in a single, scannable view — informing the widget-based dashboard architecture.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-title">Moderated User Testing</div>
-          <div class="step-body">Ran Maze-facilitated sessions with 3 financial advisors, testing the dashboard's add-widget feature and the realized gain/loss page to uncover friction and validate design decisions.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-title">Widget System Design</div>
-          <div class="step-body">Designed the modular widget experience end-to-end — including previews and contextual guidance — which was later formalized into the design system and adopted across multiple products.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <div class="step-title">System & Standards</div>
-          <div class="step-body">Defined dark mode information color standards for accessibility and established 7–10 responsive breakpoints to give engineering a clear, scalable implementation framework.</div>
-        </div>
-      </div>
-    </div>
+  <!-- COVER IMAGE -->
+  <div class="case-cover">
+    <div class="case-cover-placeholder">Images coming soon</div>
   </div>
 
-  <!-- THE WORK -->
-  <div class="work">
-    <div class="content">
-      <div class="work-header">
+  <!-- BODY -->
+  <div class="case-body">
+
+    <!-- Sticky sidebar nav -->
+    <aside class="case-nav">
+      <div class="case-nav-label">On this page</div>
+      <a href="#role">My Role</a>
+      <a href="#problem">The Problem</a>
+      <a href="#research">Research</a>
+      <a href="#work">The Work</a>
+      <a href="#outcomes">Outcomes</a>
+    </aside>
+
+    <!-- Sections -->
+    <div class="case-sections">
+
+      <!-- ROLE -->
+      <div class="case-section" id="role">
+        <div class="section-label">My Role</div>
+        <h2>Lead Designer</h2>
+        <p class="lead">I led the design of the Client Portal end-to-end, working alongside a junior designer and closely with product, engineering, and executive stakeholders throughout.</p>
+        <ul class="case-list">
+          <li>Set the overall design direction and framework for a data-heavy single-view portal</li>
+          <li>Planned and facilitated moderated user testing sessions using Maze</li>
+          <li>Designed the widget system, later formalized into the design system for use across products</li>
+          <li>Defined dark mode information color standards ensuring accessibility compliance</li>
+          <li>Authored responsive guidelines covering 7–10 breakpoints for engineering handoff</li>
+        </ul>
+      </div>
+
+      <!-- PROBLEM -->
+      <div class="case-section" id="problem">
+        <div class="section-label">The Problem</div>
+        <h2>Advisors needed a single view of a client's entire financial life</h2>
+        <p class="lead">The existing experience was fragmented — accounts, performance, and planning tools lived in separate places, making it difficult for advisors to demonstrate value and for clients to understand their full financial picture.</p>
+        <ul class="case-list problem-list">
+          <li>No single consolidated view of managed and external accounts</li>
+          <li>Dashboard lacked customization — advisors couldn't tailor the experience per client</li>
+          <li>Data-heavy pages like realized gain/loss were hard to scan and act on</li>
+          <li>No cross-platform consistency across screen sizes</li>
+        </ul>
+        <div class="callout">
+          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px;">Business Goal</div>
+          <p>Build a portal that consolidates a client's entire financial life into a single, customizable interface — and gives advisors tools to show their value in real time.</p>
+        </div>
+      </div>
+
+      <!-- RESEARCH -->
+      <div class="case-section" id="research">
+        <div class="section-label">Research</div>
+        <h2>Testing with real advisors using Maze</h2>
+        <p class="lead">I ran moderated user testing sessions with 3 financial advisors, specifically targeting two high-friction areas: the dashboard's add-widget feature and the realized gain/loss page.</p>
+        <p>To inform the dashboard architecture, I first looked at modern financial platforms — Bloomberg, Morningstar, and newer wealth tools — to build a framework for presenting data-heavy information in a single, scannable view. That research shaped the widget-based approach we took.</p>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 01</div>
+            <h4>Widget placement needs context</h4>
+            <p>Advisors didn't know what a widget would look like before placing it. Without a preview, they hesitated or placed the wrong widget — adding friction to the setup flow.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 02</div>
+            <h4>List beats drag-and-drop</h4>
+            <p>We tested two interaction models for adding widgets. A curated list with contextual descriptions significantly outperformed drag-and-drop for first-time confidence and task success.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 03</div>
+            <h4>Column order on gain/loss was wrong</h4>
+            <p>Advisors consistently reached for columns that weren't prioritized first. The existing layout didn't match their mental model for reviewing realized gain/loss data.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE WORK -->
+      <div class="case-section" id="work">
         <div class="section-label">The Work</div>
         <h2>From testing insights to shipped product</h2>
-        <p>Each section of the portal was shaped by direct user feedback. Testing surfaced the gaps; design closed them.</p>
-      </div>
+        <p class="lead">Each section of the portal was shaped by what we heard from advisors. Research surfaced the gaps; design closed them.</p>
 
-      <!-- Dashboard & Widgets -->
-      <div class="work-section">
-        <div class="work-section-header">
-          <div class="section-label">Dashboard · Widget Experience</div>
-          <div class="work-section-title">Contextual widget placement with preview</div>
-          <p class="work-section-body">User testing revealed that advisors struggled to understand what a widget would look like before placing it on the dashboard. We tested two models — drag and drop vs. a curated widget list — and found that a list with contextual descriptions and a live preview reduced errors and increased confidence. The widget experience was later added to the design system and used by other designers across different products.</p>
-        </div>
-        <div class="screen-caption">Dashboard · Add Widget Flow</div>
-        <div class="img-placeholder tall">Images coming soon</div>
-      </div>
-
-      <!-- Realized Gain/Loss -->
-      <div class="work-section">
-        <div class="work-section-header">
-          <div class="section-label">Realized Gain/Loss</div>
-          <div class="work-section-title">Column rearrangement based on advisor feedback</div>
-          <p class="work-section-body">Testing the realized gain/loss page with advisors revealed that the existing column order didn't match how they mentally process client data. We rearranged the columns based on their feedback — prioritizing the fields they reach for first — making the page faster to scan and act on.</p>
-        </div>
-        <div class="screen-caption">Realized Gain/Loss · Before & After</div>
-        <div class="screens-row">
-          <div>
-            <div class="img-placeholder tall">Before — Images coming soon</div>
+        <!-- Widget system -->
+        <div class="gallery-img-wrap" style="margin: 28px 0;">
+          <div class="gallery-info">
+            <div class="gallery-label">Dashboard · Widget Experience</div>
+            <p class="gallery-desc">Contextual widget list with live preview before placement — reducing errors and building advisor confidence. The widget system was later added to the design system and used across multiple products.</p>
           </div>
-          <div>
-            <div class="img-placeholder tall">After — Images coming soon</div>
+          <div class="gallery-placeholder tall">Images coming soon</div>
+        </div>
+
+        <!-- Gain/Loss before after -->
+        <p style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 28px 0 12px;">Realized Gain/Loss · Column Rearrangement</p>
+        <p>Based on advisor feedback, we rearranged the column order to match how they actually process client data — putting the fields they reach for first, front and center.</p>
+        <div class="before-after-row">
+          <div class="before-after-item">
+            <span class="before-after-label label-before">Before</span>
+            <div class="gallery-placeholder" style="min-height: 320px; border-radius: 10px;">Images coming soon</div>
+          </div>
+          <div class="before-after-item">
+            <span class="before-after-label label-after">After</span>
+            <div class="gallery-placeholder" style="min-height: 320px; border-radius: 10px;">Images coming soon</div>
           </div>
         </div>
-      </div>
 
-      <!-- Design System -->
-      <div class="work-section">
-        <div class="work-section-header">
-          <div class="section-label">Design System</div>
-          <div class="work-section-title">Dark mode color standards & accessibility</div>
-          <p class="work-section-body">I defined the dark mode information colors for the design system, ensuring all data visualizations and financial indicators met accessibility contrast standards. These tokens were documented and handed off to engineering with clear usage guidelines.</p>
+        <!-- Dark mode -->
+        <div class="gallery-img-wrap" style="margin: 16px 0;">
+          <div class="gallery-info">
+            <div class="gallery-label">Design System · Dark Mode Colors</div>
+            <p class="gallery-desc">Defined the information color tokens for dark mode ensuring WCAG-compliant contrast across all data visualizations and financial indicators.</p>
+          </div>
+          <div class="gallery-placeholder">Images coming soon</div>
         </div>
-        <div class="screen-caption">Dark Mode · Color System</div>
-        <div class="img-placeholder short">Images coming soon</div>
-      </div>
 
-      <!-- Responsive -->
-      <div class="work-section">
-        <div class="work-section-header">
-          <div class="section-label">Responsive Guidelines</div>
-          <div class="work-section-title">7–10 breakpoints for engineering</div>
-          <p class="work-section-body">I defined the responsive guidelines for the portal, specifying 7–10 breakpoints that covered everything from widescreen advisor workstations to tablet-sized client views. This gave engineering a clear, unambiguous reference and reduced back-and-forth during implementation.</p>
+        <!-- Responsive -->
+        <div class="gallery-img-wrap" style="margin: 16px 0;">
+          <div class="gallery-info">
+            <div class="gallery-label">Responsive Guidelines · 7–10 Breakpoints</div>
+            <p class="gallery-desc">Defined breakpoints from widescreen advisor workstations down to tablet-sized client views — giving engineering a clear, unambiguous reference and reducing back-and-forth during implementation.</p>
+          </div>
+          <div class="gallery-placeholder">Images coming soon</div>
         </div>
-        <div class="screen-caption">Responsive Breakpoints</div>
-        <div class="img-placeholder short">Images coming soon</div>
       </div>
-    </div>
-  </div>
 
-  <!-- OUTCOMES -->
-  <div class="outcomes">
-    <div class="content">
-      <div class="outcomes-header">
+      <!-- OUTCOMES -->
+      <div class="case-section" id="outcomes">
         <div class="section-label">Outcomes</div>
         <h2>Shipped, systemized, and scaled</h2>
-        <p>The work extended beyond the portal itself — contributing foundational components and standards to the broader design system.</p>
+        <p class="lead">The work extended beyond the portal itself — contributing foundational components and standards to the broader design system used across Envestnet products.</p>
+        <div class="outcome-grid">
+          <div class="outcome-card">
+            <div class="outcome-num">🧩</div>
+            <div class="outcome-label">Widget system adopted into the design system and used across multiple products by other designers</div>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-num">♿</div>
+            <div class="outcome-label">Dark mode color standards defined and documented for WCAG-compliant financial data visualization</div>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-num">7–10</div>
+            <div class="outcome-label">Responsive breakpoints documented for engineering, reducing implementation ambiguity</div>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-num">3</div>
+            <div class="outcome-label">Advisors tested in moderated sessions — findings directly shaped widget and gain/loss redesign</div>
+          </div>
+        </div>
       </div>
-      <div class="outcome-grid">
-        <div class="outcome-card">
-          <div class="outcome-icon">🧩</div>
-          <div class="outcome-title">Widget system adopted platform-wide</div>
-          <div class="outcome-body">The widget design experience was formalized into the design system and used by other designers across different Envestnet products.</div>
-        </div>
-        <div class="outcome-card">
-          <div class="outcome-icon">♿</div>
-          <div class="outcome-title">Accessible dark mode standards</div>
-          <div class="outcome-body">Defined information color tokens for dark mode ensuring WCAG-compliant contrast across all data-heavy financial views.</div>
-        </div>
-        <div class="outcome-card">
-          <div class="outcome-icon">📐</div>
-          <div class="outcome-title">Responsive framework for engineering</div>
-          <div class="outcome-body">7–10 breakpoints documented and handed off, giving engineering a clear implementation path across all device sizes.</div>
-        </div>
-      </div>
+
     </div>
   </div>
 
-  <!-- CONTACT -->
-  <div class="contact-section" id="contact">
-    <div class="content">
-      <div class="contact-inner">
-        <div>
-          <h2>Get in touch</h2>
-          <p>Open to design roles and networking. Coffee anyone?</p>
-        </div>
-        <div class="contact-links">
-          <button onclick="copyEmail()" class="contact-link" id="email-btn">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
-          <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
-          <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
-        </div>
-      </div>
+  <!-- FOOTER NAV -->
+  <div class="case-footer-nav">
+    <div class="case-footer-inner">
+      <a href="../" class="footer-back">← Back to all work</a>
     </div>
   </div>
 
-  <footer></footer>
+  <!-- CONTACT FOOTER -->
+  <div id="contact" style="border-top: 1px solid var(--border); background: var(--surface); margin-top: 0;">
+    <div class="contact-footer-inner">
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px;">Get in touch</h3>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.7;">Open to design roles and networking. Coffee anyone?</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button onclick="copyEmailFooter()" class="contact-link" id="email-footer-btn" style="width:100%; text-align:left; cursor:pointer; background:var(--bg); border:1px solid var(--border);">nisargp1990@gmail.com <span id="email-footer-label">⎘ Copy</span></button>
+        <a href="https://linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+        <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
+      </div>
+    </div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
     <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
-    <div style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
-      <button onclick="lbZoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
-      <span id="lb-zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
-      <button onclick="lbZoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
+    <div id="lightbox-controls" style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="zoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
+      <span id="zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="zoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
       <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
       <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px;">Close</button>
     </div>
   </div>
 
   <script>
-    function copyEmail() {
+    // Sticky sidebar active state
+    const sections = document.querySelectorAll('.case-section');
+    const navLinks = document.querySelectorAll('.case-nav a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.case-nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const zoomLabel = document.getElementById('zoom-level');
+    let currentZoom = 1, panX = 0, panY = 0, isDragging = false, startX, startY;
+
+    function applyTransform() {
+      lightboxImg.style.transform = `scale(${currentZoom}) translate(${panX/currentZoom}px,${panY/currentZoom}px)`;
+      zoomLabel.textContent = Math.round(currentZoom*100)+'%';
+      lightboxImg.style.cursor = currentZoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default';
+    }
+    function zoomIn()  { currentZoom = Math.min(currentZoom+0.25,4); applyTransform(); }
+    function zoomOut() { currentZoom = Math.max(currentZoom-0.25,0.5); if(currentZoom===1){panX=0;panY=0;} applyTransform(); }
+    function closeLightbox() { lightbox.style.display='none'; lightboxImg.src=''; currentZoom=1; panX=0; panY=0; applyTransform(); }
+
+    lightboxImg.addEventListener('mousedown', e => { if(currentZoom<=1) return; isDragging=true; startX=e.clientX-panX; startY=e.clientY-panY; applyTransform(); e.preventDefault(); });
+    document.addEventListener('mousemove', e => { if(!isDragging) return; panX=e.clientX-startX; panY=e.clientY-startY; applyTransform(); });
+    document.addEventListener('mouseup', () => { isDragging=false; applyTransform(); });
+    lightboxImg.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0?zoomIn():zoomOut(); }, {passive:false});
+    lightbox.addEventListener('click', e => { if(e.target===lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); if(e.key==='+'||e.key==='=') zoomIn(); if(e.key==='-') zoomOut(); });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.dataset.full || img.src;
+        currentZoom=1; panX=0; panY=0; applyTransform();
+        lightbox.style.display='flex';
+      });
+    });
+
+    function copyEmailFooter() {
       navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
-        const label = document.getElementById('email-copy-label');
+        const label = document.getElementById('email-footer-label');
         label.textContent = '✓ Copied!';
         setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
       });
     }
-
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const lbZoomLabel = document.getElementById('lb-zoom-level');
-    let lbZoom = 1, lbPanX = 0, lbPanY = 0, lbDragging = false, lbSX, lbSY;
-
-    function lbApply() {
-      lbImg.style.transform = `scale(${lbZoom}) translate(${lbPanX/lbZoom}px,${lbPanY/lbZoom}px)`;
-      lbZoomLabel.textContent = Math.round(lbZoom*100)+'%';
-      lbImg.style.cursor = lbZoom > 1 ? (lbDragging ? 'grabbing' : 'grab') : 'default';
-    }
-    function lbZoomIn()  { lbZoom = Math.min(lbZoom+0.25,4); lbApply(); }
-    function lbZoomOut() { lbZoom = Math.max(lbZoom-0.25,0.5); if(lbZoom===1){lbPanX=0;lbPanY=0;} lbApply(); }
-    function closeLightbox() { lb.style.display='none'; lbImg.src=''; lbZoom=1; lbPanX=0; lbPanY=0; lbApply(); }
-
-    lb.addEventListener('click', e => { if(e.target===lb) closeLightbox(); });
-    lb.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0 ? lbZoomIn() : lbZoomOut(); }, {passive:false});
-    lbImg.addEventListener('mousedown', e => { lbDragging=true; lbSX=e.clientX-lbPanX; lbSY=e.clientY-lbPanY; lbApply(); });
-    window.addEventListener('mousemove', e => { if(!lbDragging) return; lbPanX=e.clientX-lbSX; lbPanY=e.clientY-lbSY; lbApply(); });
-    window.addEventListener('mouseup', () => { lbDragging=false; lbApply(); });
-    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
-
-    document.querySelectorAll('.expandable').forEach(img => {
-      img.addEventListener('click', () => {
-        lb.style.display = 'flex';
-        lbImg.src = img.dataset.full || img.src;
-        lbZoom=1; lbPanX=0; lbPanY=0; lbApply();
-      });
-    });
   </script>
   <script>
   /* scroll-reveal-init */
   (function() {
     setTimeout(function() {
       var sel = [
-        '.step','.outcome-card','.contact-inner',
-        '.role-card','.overview-grid','.approach-header',
-        '.work-header','.outcomes-header','.work-section'
+        '.strategy-card','.outcome-card','.callout',
+        '.section-img','.section-img-row','.before-after-row',
+        '.outcome-grid','.case-hero-stats'
       ].join(',');
       var items = document.querySelectorAll(sel);
       items.forEach(function(el) { el.classList.add('reveal'); });
 
-      ['.steps-grid','.outcome-grid','.screens-row','.screens-row-3'].forEach(function(g) {
+      ['.strategy-grid','.outcome-grid','.case-hero-stats'].forEach(function(g) {
         document.querySelectorAll(g).forEach(function(grid) {
           Array.from(grid.children).forEach(function(c, i) {
             c.style.transitionDelay = (i * 0.1) + 's';
