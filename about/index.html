@@ -179,6 +179,24 @@
       color: var(--muted);
     }
 
+    .exp-company-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .industry-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
     /* ── CONTACT ── */
     .contact-section {
       max-width: 1200px;
@@ -370,22 +388,34 @@
       <div class="exp-list">
         <div class="exp-item">
           <div class="exp-role">Director of Product Design</div>
-          <div class="exp-company">Yodlee | Envestnet, Fintech</div>
+          <div class="exp-company-row">
+            <span class="exp-company">Yodlee | Envestnet</span>
+            <span class="industry-pill">Fintech</span>
+          </div>
           <div class="exp-period">Jul 2022 – Oct 2025</div>
         </div>
         <div class="exp-item">
           <div class="exp-role">Sr. Product Designer</div>
-          <div class="exp-company">Yodlee | Envestnet, Fintech</div>
+          <div class="exp-company-row">
+            <span class="exp-company">Yodlee | Envestnet</span>
+            <span class="industry-pill">Fintech</span>
+          </div>
           <div class="exp-period">Oct 2020 – Jul 2022</div>
         </div>
         <div class="exp-item">
           <div class="exp-role">UX/UI Designer</div>
-          <div class="exp-company">Chubb, Insurance</div>
+          <div class="exp-company-row">
+            <span class="exp-company">Chubb</span>
+            <span class="industry-pill">Insurance</span>
+          </div>
           <div class="exp-period">Oct 2018 – Oct 2020</div>
         </div>
         <div class="exp-item">
           <div class="exp-role">UX/UI Designer</div>
-          <div class="exp-company">Optum Technology, Healthcare</div>
+          <div class="exp-company-row">
+            <span class="exp-company">Optum Technology</span>
+            <span class="industry-pill">Healthcare</span>
+          </div>
           <div class="exp-period">Jun 2014 – Oct 2018</div>
         </div>
       </div>
