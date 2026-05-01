@@ -665,11 +665,15 @@
         <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5);">B2B</span>
       </div>
       <h1>Client Portal</h1>
-      <p class="case-hero-subtitle">A modular, widget-based wealth management portal giving advisors and their clients a single, cohesive view of their entire financial lives — validated through moderated user testing and grounded in a scalable design system.</p>
+      <p class="case-hero-subtitle">A modular, widget-based wealth management portal giving advisors and their clients a single, cohesive view of their entire financial landscape.</p>
       <div class="case-hero-stats">
         <div>
-          <div class="hero-stat-num">7–10</div>
-          <div class="hero-stat-label">Responsive breakpoints defined</div>
+          <div class="hero-stat-num">100k</div>
+          <div class="hero-stat-label">Advisors</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">$4.5T</div>
+          <div class="hero-stat-label">In assets managed</div>
         </div>
         <div>
           <div class="hero-stat-num">3</div>
@@ -696,8 +700,8 @@
       <div class="case-nav-label">On this page</div>
       <a href="#role">My Role</a>
       <a href="#problem">The Problem</a>
-      <a href="#research">Research</a>
       <a href="#work">The Work</a>
+      <a href="#testing">User Testing</a>
       <a href="#outcomes">Outcomes</a>
     </aside>
 
@@ -710,11 +714,10 @@
         <h2>Lead Designer</h2>
         <p class="lead">I led the design of the Client Portal end-to-end, working alongside a junior designer and closely with product, engineering, and executive stakeholders throughout.</p>
         <ul class="case-list">
-          <li>Set the overall design direction and framework for a data-heavy single-view portal</li>
-          <li>Planned and facilitated moderated user testing sessions using Maze</li>
+          <li>Created the responsive design framework for a data-heavy single-view portal</li>
           <li>Designed the widget system, later formalized into the design system for use across products</li>
+          <li>Planned and facilitated moderated user testing sessions using Maze</li>
           <li>Defined dark mode information color standards ensuring accessibility compliance</li>
-          <li>Authored responsive guidelines covering 7–10 breakpoints for engineering handoff</li>
         </ul>
       </div>
 
@@ -722,42 +725,15 @@
       <div class="case-section" id="problem">
         <div class="section-label">The Problem</div>
         <h2>Advisors needed a single view of a client's entire financial life</h2>
-        <p class="lead">The existing experience was fragmented — accounts, performance, and planning tools lived in separate places, making it difficult for advisors to demonstrate value and for clients to understand their full financial picture.</p>
+        <p class="lead">Advisors were using multiple portals and experiences to view and advise client financial information. Clients didn't have a view of their advisor information outside of emails and phone calls. It became difficult for advisors to demonstrate value and for clients to understand their full financial picture.</p>
         <ul class="case-list problem-list">
           <li>No single consolidated view of managed and external accounts</li>
-          <li>Dashboard lacked customization — advisors couldn't tailor the experience per client</li>
-          <li>Data-heavy pages like realized gain/loss were hard to scan and act on</li>
+          <li>Dashboard lacked customization — advisors couldn't tailor the existing experiences per client</li>
           <li>No cross-platform consistency across screen sizes</li>
         </ul>
         <div class="callout">
           <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 6px;">Business Goal</div>
-          <p>Build a portal that consolidates a client's entire financial life into a single, customizable interface — and gives advisors tools to show their value in real time.</p>
-        </div>
-      </div>
-
-      <!-- RESEARCH -->
-      <div class="case-section" id="research">
-        <div class="section-label">Research</div>
-        <h2>Testing with real advisors using Maze</h2>
-        <p class="lead">I ran moderated user testing sessions with 3 financial advisors, specifically targeting two high-friction areas: the dashboard's add-widget feature and the realized gain/loss page.</p>
-        <p>To inform the dashboard architecture, I first looked at modern financial platforms — Bloomberg, Morningstar, and newer wealth tools — to build a framework for presenting data-heavy information in a single, scannable view. That research shaped the widget-based approach we took.</p>
-
-        <div class="strategy-grid">
-          <div class="strategy-card">
-            <div class="strategy-num">Finding 01</div>
-            <h4>Widget placement needs context</h4>
-            <p>Advisors didn't know what a widget would look like before placing it. Without a preview, they hesitated or placed the wrong widget — adding friction to the setup flow.</p>
-          </div>
-          <div class="strategy-card">
-            <div class="strategy-num">Finding 02</div>
-            <h4>List beats drag-and-drop</h4>
-            <p>We tested two interaction models for adding widgets. A curated list with contextual descriptions significantly outperformed drag-and-drop for first-time confidence and task success.</p>
-          </div>
-          <div class="strategy-card">
-            <div class="strategy-num">Finding 03</div>
-            <h4>Column order on gain/loss was wrong</h4>
-            <p>Advisors consistently reached for columns that weren't prioritized first. The existing layout didn't match their mental model for reviewing realized gain/loss data.</p>
-          </div>
+          <p>Build a portal that consolidates a client's entire financial life into a single, customizable interface and gives advisors tools to show their value in real time.</p>
         </div>
       </div>
 
@@ -806,6 +782,31 @@
             <p class="gallery-desc">Defined breakpoints from widescreen advisor workstations down to tablet-sized client views — giving engineering a clear, unambiguous reference and reducing back-and-forth during implementation.</p>
           </div>
           <div class="gallery-placeholder">Images coming soon</div>
+        </div>
+      </div>
+
+      <!-- USER TESTING -->
+      <div class="case-section" id="testing">
+        <div class="section-label">User Testing</div>
+        <h2>Testing with real advisors using Maze</h2>
+        <p class="lead">I ran moderated user testing sessions with 3 financial advisors, specifically targeting two high-friction areas: the dashboard's add-widget feature and the realized gain/loss page.</p>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 01</div>
+            <h4>Widget placement needs context</h4>
+            <p>Advisors didn't know what a widget would look like before placing it. Without a preview, they hesitated or placed the wrong widget — adding friction to the setup flow.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 02</div>
+            <h4>Drag-and-drop outperformed the list</h4>
+            <p>We tested two interaction models for adding widgets. Drag-and-drop significantly outperformed a curated list for speed and first-time task success.</p>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">Finding 03</div>
+            <h4>Advisors tried to drag column headers</h4>
+            <p>Advisors attempted to rearrange columns by dragging column headers. This led to us adding a column rearrange drag and drop to the realized gain/loss page.</p>
+          </div>
         </div>
       </div>
 
