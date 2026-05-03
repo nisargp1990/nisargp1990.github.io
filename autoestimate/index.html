@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisarg — Product Design</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --accent: #c2410c;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    body { animation: fadeIn 0.4s ease both; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left { display: flex; align-items: center; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5ee;
+      border: 1px solid #b7dfc7;
+      color: #2d6a4f;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .nav-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #2d6a4f;
+      border-radius: 50%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%);
+      padding: 72px 48px 80px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .overview h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .overview p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .role-item {}
+
+    .role-item-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .role-item-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .role-item-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── APPROACH ── */
+    .approach {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .approach-header {
+      margin-bottom: 48px;
+    }
+
+    .approach-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .approach-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--surface);
+      padding: 28px 24px;
+    }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .step-body {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── WORK ── */
+    .work {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-header {
+      margin-bottom: 40px;
+    }
+
+    .work-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .work-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .screen-caption {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .screens-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: start;
+    }
+
+    .screens-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .screen-block img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── OUTCOMES ── */
+    .outcomes {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .outcomes-header {
+      margin-bottom: 40px;
+    }
+
+    .outcomes-header h2 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .outcomes-header p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .outcome-stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .outcome-stat-card {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+        gap: 24px;
+      }
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 72px 0 80px;
+    }
+
+    .contact-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-inner h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .contact-inner p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-links button.contact-link { width: 100%; text-align: left; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .contact-link:hover { background: var(--surface2); border-color: #ccc; }
+    .contact-link span { color: var(--muted); font-size: 13px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-badge { display: none; }
+      .nav-back { display: none; }
+      .hero { padding: 48px 20px 56px; }
+      .content { padding: 0 20px; }
+
+      .hero-meta { justify-content: flex-start; }
+
+      .overview-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+
+      .screens-grid { grid-template-columns: 1fr; }
+      .screens-row { grid-template-columns: 1fr; }
+
+.contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
+      footer { padding: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── MICRO-INTERACTIONS ── */
+    /* Expandable image hover */
+    img.expandable { transition: transform 0.3s ease; }
+    img.expandable:hover { transform: scale(1.015); }
+
+    /* Section label slide-in */
+    .section-label, .hero-label {
+      display: inline-flex;
+      overflow: hidden;
+    }
+
+    /* Nav link animated underline */
+    .nav-links a, .case-nav a {
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Footer-back / footer-next hover color */
+    .footer-back { transition: color 0.2s, gap 0.2s; }
+
+    /* Stat card number scale on reveal */
+    .stat-num, .hero-stat-num {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in .stat-num, .reveal.in .hero-stat-num { transform: none; }
+
+    /* Ops/value/step card subtle border glow on hover */
+    .ops-card, .value-card, .step, .step-card, .strategy-card, .bento-item {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .ops-card:hover, .value-card:hover, .step:hover, .step-card:hover,
+    .strategy-card:hover, .bento-item:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+</style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33XHPW965F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-33XHPW965F');
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../" class="nav-logo">Nisarg Patel.</a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../">Work</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-badge">Open to opportunities</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-meta">
+        <span class="hero-tag">Insurance</span>
+        <div class="hero-dot"></div>
+        <span class="hero-tag">Chubb</span>
+        <div class="hero-dot"></div>
+        <span class="hero-tag">2018–2020</span>
+      </div>
+      <h1>Auto Estimate</h1>
+      <p class="hero-desc">A guided mobile claims app that cuts vehicle damage assessment from four business days down to under three hours — getting policyholders back on the road faster.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <div class="content">
+      <div class="overview-grid">
+        <div>
+          <div class="section-label">The Problem</div>
+          <h2>Days of waiting after a moment of stress</h2>
+          <p>A typical automobile claim took over four business days to resolve. When a vehicle becomes unusable after an accident, the disruption compounds quickly — missed work, unexpected expenses, and the anxiety of not knowing what comes next. Efficient claim processing wasn't just about speed; it was about reducing real human impact at the worst possible moment.</p>
+        </div>
+        <div class="role-card">
+          <div class="role-item">
+            <div class="role-item-label">My Role</div>
+            <div class="role-item-value">UX/UI Designer</div>
+          </div>
+          <div class="role-item">
+            <div class="role-item-label">Company</div>
+            <div class="role-item-value">Chubb</div>
+            <div class="role-item-sub">Insurance · Enterprise</div>
+          </div>
+          <div class="role-item">
+            <div class="role-item-label">Timeline</div>
+            <div class="role-item-value">2018–2020</div>
+          </div>
+          <div class="role-item">
+            <div class="role-item-label">Platform</div>
+            <div class="role-item-value">iOS &amp; Android</div>
+            <div class="role-item-sub">Mobile-first application</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <div class="approach">
+    <div class="content">
+      <div class="approach-header">
+        <div class="section-label">Approach</div>
+        <h2>From damage to estimate — guided step by step</h2>
+        <p>The core challenge was designing a process that any policyholder could follow in a high-stress moment, without training or a call center agent. Every screen had to earn its place.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Research &amp; Mapping</div>
+          <div class="step-body">Shadowed claims adjusters and interviewed policyholders to understand friction points, language barriers, and where photo submissions failed to capture enough detail.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Sketch &amp; Concept</div>
+          <div class="step-body">Explored multiple flows from initial claim search through damage documentation. Focused on reducing cognitive load for users in an already stressful moment.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Guided Photo Flow</div>
+          <div class="step-body">Designed a step-by-step photo capture sequence with real-time angle guidance, ensuring images were taken from correct positions with sufficient clarity for accurate assessment.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">Estimate &amp; Delivery</div>
+          <div class="step-body">Applied Chubb branding and enterprise design standards to produce a final experience that felt familiar, trustworthy, and aligned with the existing product ecosystem.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE WORK -->
+  <div class="work">
+    <div class="content">
+      <div class="work-header">
+        <div class="section-label">The Work</div>
+        <h2>Screens built for the field</h2>
+        <p>From early sketches to production-ready screens — designing a flow that works in a parking lot, in bad lighting, with shaky hands.</p>
+      </div>
+
+      <div class="screens-grid">
+        <div class="screen-block">
+          <div class="screen-caption">Early Sketches</div>
+          <img src="../images/mobileestimate/sketch.avif" alt="Early concept sketches" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+        </div>
+        <div class="screen-block" style="display: flex; align-items: center; justify-content: center;">
+          <div style="width: 68%; display: flex; flex-direction: column; align-items: center;">
+            <div class="screen-caption" style="align-self: flex-start;">Guided Photo Capture</div>
+            <img src="../images/mobileestimate/carimage.png" alt="Guided photo capture" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes">
+    <div class="content">
+      <div class="outcomes-header">
+        <div class="section-label">Outcomes</div>
+        <h2>Back on the road in hours, not days</h2>
+        <p>The guided photo capture process gave adjusters everything they needed to assess damage remotely — eliminating back-and-forth and dramatically compressing cycle time.</p>
+      </div>
+      <div class="outcome-stat-card" style="margin-bottom: 40px;">
+        <div class="stat-item">
+          <div class="stat-num">&lt;3 hrs</div>
+          <div class="stat-label">Claim turnaround time, down from 4+ business days</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4+ days</div>
+          <div class="stat-label">Previous average claim resolution time</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">Zero</div>
+          <div class="stat-label">Calls to a claims adjuster required for photo submission</div>
+        </div>
+      </div>
+
+      <div class="screens-row" style="gap: 32px;">
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Claim Search</div>
+            <img src="../images/mobileestimate/claimsearch.avif" alt="Claim search screen" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Claim Flow</div>
+            <img src="../images/mobileestimate/claimflow.avif" alt="Claim submission flow" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+        <div class="screen-block" style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 78%;">
+            <div class="screen-caption">Estimate Review</div>
+            <img src="../images/mobileestimate/claimestimate.avif" alt="Claim estimate review" class="expandable" style="cursor: zoom-in; width: 100%; display: block;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="content">
+      <div class="contact-inner">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Open to design roles and networking. Coffee anyone?</p>
+        </div>
+        <div class="contact-links">
+          <button onclick="copyEmail()" class="contact-link" id="email-btn">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+          <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+          <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <div style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="lbZoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
+      <span id="lb-zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="lbZoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
+      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px;">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbZoomLabel = document.getElementById('lb-zoom-level');
+    let lbZoom = 1, lbPanX = 0, lbPanY = 0, lbDragging = false, lbSX, lbSY;
+
+    function lbApply() {
+      lbImg.style.transform = `scale(${lbZoom}) translate(${lbPanX/lbZoom}px,${lbPanY/lbZoom}px)`;
+      lbZoomLabel.textContent = Math.round(lbZoom*100)+'%';
+      lbImg.style.cursor = lbZoom > 1 ? (lbDragging ? 'grabbing' : 'grab') : 'default';
+    }
+    function lbZoomIn()  { lbZoom = Math.min(lbZoom+0.25,4); lbApply(); }
+    function lbZoomOut() { lbZoom = Math.max(lbZoom-0.25,0.5); if(lbZoom===1){lbPanX=0;lbPanY=0;} lbApply(); }
+    function closeLightbox() { lb.style.display='none'; lbImg.src=''; lbZoom=1; lbPanX=0; lbPanY=0; lbApply(); }
+
+    lb.addEventListener('click', e => { if(e.target===lb) closeLightbox(); });
+    lb.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0 ? lbZoomIn() : lbZoomOut(); }, {passive:false});
+    lbImg.addEventListener('mousedown', e => { lbDragging=true; lbSX=e.clientX-lbPanX; lbSY=e.clientY-lbPanY; lbApply(); });
+    window.addEventListener('mousemove', e => { if(!lbDragging) return; lbPanX=e.clientX-lbSX; lbPanY=e.clientY-lbSY; lbApply(); });
+    window.addEventListener('mouseup', () => { lbDragging=false; lbApply(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lb.style.display = 'flex';
+        lbImg.src = img.dataset.full || img.src;
+        lbZoom=1; lbPanX=0; lbPanY=0; lbApply();
+      });
+    });
+  </script>
+  <script>
+  /* scroll-reveal-init */
+  (function() {
+    setTimeout(function() {
+      var sel = [
+        '.project-card','.ops-card','.value-card','.step','.step-card',
+        '.strategy-card','.bento-item','.exp-item','.contact-inner',
+        '.role-card','.outcome-stat-card','.maturity-grid','.team-images',
+        '.overview-grid','.screens-grid','.screens-row',
+        '.outcome-layout','.section-img','.section-img-row','.before-after-row',
+        '.outcome-grid','.role-block','.approach-header','.work-header',
+        '.outcomes-header','.designops-header','.values-header','.team-header',
+        '.callout','.insight-block'
+      ].join(',');
+      var items = document.querySelectorAll(sel);
+      items.forEach(function(el) { el.classList.add('reveal'); });
+
+      ['.projects-grid','.ops-grid','.values-grid','.steps-grid',
+       '.past-grid','.bento-grid','.strategy-grid','.outcome-grid',
+       '.team-images','.section-img-row',
+       '.case-hero-stats','.hero-actions'].forEach(function(g) {
+        document.querySelectorAll(g).forEach(function(grid) {
+          Array.from(grid.children).forEach(function(c, i) {
+            c.style.transitionDelay = (i * 0.1) + 's';
+          });
+        });
+      });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+      items.forEach(function(el) { io.observe(el); });
+
+      // Stat count-up
+      document.querySelectorAll('.hero-stat-num, .stat-num').forEach(function(el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/^([^0-9]*)(\d+(?:\.\d+)?)(.*)$/);
+        if (!m || parseFloat(m[2]) === 0) return;
+        var pre = m[1], numStr = m[2], suf = m[3];
+        var target = parseFloat(numStr);
+        var dec = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+        var fired = false;
+        var cio = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (!e.isIntersecting || fired) return;
+            fired = true; cio.unobserve(e.target);
+            var t0 = performance.now(), dur = 950;
+            (function tick(now) {
+              var p = Math.min((now - t0) / dur, 1);
+              var v = target * (1 - Math.pow(1 - p, 3));
+              el.textContent = pre + v.toFixed(dec) + suf;
+              if (p < 1) requestAnimationFrame(tick);
+            })(t0);
+          });
+        }, { threshold: 0.6 });
+        cio.observe(el);
+      });
+    }, 460);
+  })();
+  </script>
+
+</body>
+</html>

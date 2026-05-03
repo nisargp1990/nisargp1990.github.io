@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisarg — Product Design</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface2: #f0ede8;
+      --border: #e5e1da;
+      --text: #1a1814;
+      --muted: #5e5b56;
+      --accent: #c2410c;
+      --accent-bg: #fff4ee;
+      --accent-border: #fcd9c4;
+      --green: #2d6a4f;
+      --dark: #0f172a;
+      --radius: 14px;
+      --font: 'Satoshi', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-top: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left { display: flex; align-items: center; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5ee;
+      border: 1px solid #b7dfc7;
+      color: #2d6a4f;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .nav-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #2d6a4f;
+      border-radius: 50%;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 60%, #44403c 100%);
+      padding: 80px 48px 96px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 4.5vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .hero-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── SHARED ── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ── DESIGNOPS ── */
+    .designops {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .designops-header {
+      margin-bottom: 48px;
+    }
+
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .ops-card {
+      background: var(--surface);
+      padding: 32px 28px 36px;
+    }
+
+    .ops-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .ops-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .ops-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ops-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .ops-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── MATURITY ── */
+    .maturity {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .maturity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .maturity-text .section-title { margin-bottom: 20px; }
+    .maturity-text .section-body { margin-bottom: 20px; }
+
+    .maturity-img img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+    }
+
+    .team-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .team-img-card img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .img-caption {
+      padding: 10px 0 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── PROCESS ── */
+    .process {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+      align-items: end;
+    }
+
+    .process-img-wide img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ── VALUES ── */
+    .values {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .values-header {
+      margin-bottom: 48px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .value-card {
+      background: var(--surface);
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .value-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .value-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .value-block {
+      margin-bottom: 14px;
+    }
+
+    .value-block-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .value-block-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 64px 0 80px;
+    }
+
+    .contact-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-inner h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .contact-inner p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-links button.contact-link { width: 100%; text-align: left; cursor: pointer; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .contact-link:hover { background: var(--surface2); border-color: #ccc; }
+    .contact-link span { color: var(--muted); font-size: 13px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    body { animation: fadeIn 0.4s ease both; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; }
+      .nav-badge { display: none; }
+      .nav-back { display: none; }
+
+      .hero { padding: 52px 20px 64px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-photo { display: none; }
+
+      .section-wrap { padding: 0 20px; }
+
+      .designops { padding: 52px 0 48px; }
+      .ops-grid { grid-template-columns: 1fr; }
+
+      .maturity { padding: 52px 0 48px; }
+      .maturity-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .team { padding: 52px 0 48px; }
+      .team-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+      .team-images { grid-template-columns: 1fr; }
+
+      .process { padding: 52px 0 48px; }
+      .process-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+
+      .values { padding: 52px 0 48px; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+
+      .contact-section { padding: 48px 0 64px; }
+      .contact-inner { grid-template-columns: 1fr; padding: 28px 20px; gap: 28px; }
+
+      footer { padding: 20px; }
+    }
+
+    @media (max-width: 540px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── MICRO-INTERACTIONS ── */
+    /* Expandable image hover */
+    img.expandable { transition: transform 0.3s ease; }
+    img.expandable:hover { transform: scale(1.015); }
+
+    /* Section label slide-in */
+    .section-label, .hero-label {
+      display: inline-flex;
+      overflow: hidden;
+    }
+
+    /* Nav link animated underline */
+    .nav-links a, .case-nav a {
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Footer-back / footer-next hover color */
+    .footer-back { transition: color 0.2s, gap 0.2s; }
+
+    /* Stat card number scale on reveal */
+    .stat-num, .hero-stat-num {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in .stat-num, .reveal.in .hero-stat-num { transform: none; }
+
+    /* Ops/value/step card subtle border glow on hover */
+    .ops-card, .value-card, .step, .step-card, .strategy-card, .bento-item {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .ops-card:hover, .value-card:hover, .step:hover, .step-card:hover,
+    .strategy-card:hover, .bento-item:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+</style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33XHPW965F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-33XHPW965F');
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="../" class="nav-logo">Nisarg Patel.</a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../">Work</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-badge">Open to opportunities</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">Leadership</div>
+        <h1>Design<br/>Leadership</h1>
+        <p class="hero-desc">Aligning user-centered design with business strategy to deliver measurable impact by expanding design practices through people, process, and culture.</p>
+      </div>
+      <div class="hero-photo">
+        <img src="../images/leadership/IMG_4421 2.png" alt="Design Leadership" />
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGNOPS -->
+  <div class="designops">
+    <div class="section-wrap">
+      <div class="designops-header">
+        <div class="section-label">DesignOps Practices</div>
+        <h2 class="section-title">Building the operating system<br/>behind great design</h2>
+        <p class="section-body">DesignOps isn't just tooling or process, it's how a team thinks, works, and creates impact. The design leadership team organized our practice around three core questions.</p>
+      </div>
+
+      <div class="ops-grid">
+        <div class="ops-card">
+          <div class="ops-card-label">01 — People</div>
+          <div class="ops-card-title">How we work<br/>together</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Organize</div>
+            <div class="ops-pill">Collaborate</div>
+            <div class="ops-pill">Humanize</div>
+          </div>
+        </div>
+        <div class="ops-card">
+          <div class="ops-card-label">02 — Process</div>
+          <div class="ops-card-title">How we get<br/>work done</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Standardize</div>
+            <div class="ops-pill">Harmonize</div>
+            <div class="ops-pill">Prioritize</div>
+          </div>
+        </div>
+        <div class="ops-card">
+          <div class="ops-card-label">03 — Impact</div>
+          <div class="ops-card-title">How we create<br/>impact</div>
+          <div class="ops-pills">
+            <div class="ops-pill">Measure</div>
+            <div class="ops-pill">Socialize</div>
+            <div class="ops-pill">Enable</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <img src="../images/leadership/sketch.png" alt="DesignOps in action" class="expandable" style="width:100%; display:block; border-radius:8px; cursor:zoom-in;" />
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+        <div>
+          <img src="../images/leadership/riskchart.webp" alt="Risk Chart" class="expandable" style="width:100%; display:block; border-radius:8px; cursor:zoom-in;" />
+        </div>
+        <div>
+          <img src="../images/leadership/riskchart2.avif" alt="Risk Chart 2" class="expandable" style="width:100%; display:block; border-radius:8px; cursor:zoom-in;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UX MATURITY -->
+  <div class="maturity">
+    <div class="section-wrap">
+      <div class="maturity-grid">
+        <div class="maturity-text">
+          <div class="section-label">UX Maturity</div>
+          <h2 class="section-title">Understanding where we are to know where to go</h2>
+          <p class="section-body">Understanding the organization's current level of UX maturity provided the insights needed to take targeted steps toward advancing to the next stage.</p>
+          <p class="section-body" style="margin-top: 16px;">The examples below highlight key actions implemented by leadership to drive this growth, from building team structure to socializing design's value across the organization.</p>
+        </div>
+        <div class="maturity-img">
+          <img src="../images/leadership/maturity.png" alt="UX Maturity Framework" class="expandable" style="cursor:zoom-in;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM COMPOSITION -->
+  <div class="team">
+    <div class="section-wrap">
+      <div class="team-header">
+        <div>
+          <div class="section-label">Team Composition</div>
+          <h2 class="section-title">Right skills, right place, right time</h2>
+        </div>
+        <p class="section-body">Understanding specific skills the team has and utilizing them strategically to align with product needs. This allowed the team to develop a method to specialize in design roles, allowing generalized to also focus on focused skillsets.</p>
+      </div>
+
+      <div class="team-images">
+        <div class="team-img-card">
+          <img src="../images/leadership/Roles 1.png" alt="Design Roles Framework" class="expandable" style="cursor:zoom-in;" />
+          <div class="img-caption">Role Specialization</div>
+        </div>
+        <div class="team-img-card">
+          <img src="../images/leadership/skills.png" alt="Skills Mapping" class="expandable" style="cursor:zoom-in;" />
+          <div class="img-caption">Skills Mapping</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="process">
+    <div class="section-wrap">
+      <div class="maturity-grid">
+        <div class="maturity-text">
+          <div class="section-label">Design Process</div>
+          <h2 class="section-title">Turning creative energy into a predictable, scalable discipline</h2>
+          <p class="section-body">A clear design process ensures quality and alignment across every product surface. We defined shared rituals, decision checkpoints, and artifact standards as guardrails so the team could move fast without losing quality.</p>
+        </div>
+        <div class="maturity-img">
+          <img src="../images/leadership/Frame 7.png" alt="Design Process Framework" class="expandable" style="cursor:zoom-in;" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="section-wrap">
+      <div class="contact-inner">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Open to design roles and networking. Coffee anyone?</p>
+        </div>
+        <div class="contact-links">
+          <button onclick="copyEmail()" class="contact-link" id="email-btn">nisargp1990@gmail.com <span id="email-copy-label">⎘ Copy</span></button>
+          <a href="https://www.linkedin.com/in/nisargp25" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
+          <a href="../Nisargp_resume.pdf" download class="contact-link">Resume <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer></footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <div style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
+      <button onclick="lbZoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
+      <span id="lb-zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
+      <button onclick="lbZoomIn()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">+</button>
+      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:none; color:rgba(255,255,255,0.6); font-size:13px; cursor:pointer; font-family:var(--font); padding:0 4px;">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('nisargp1990@gmail.com').then(() => {
+        const label = document.getElementById('email-copy-label');
+        label.textContent = '✓ Copied!';
+        setTimeout(() => { label.textContent = '⎘ Copy'; }, 2000);
+      });
+    }
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbZoomLabel = document.getElementById('lb-zoom-level');
+    let lbZoom = 1, lbPanX = 0, lbPanY = 0, lbDragging = false, lbSX, lbSY;
+
+    function lbApply() {
+      lbImg.style.transform = `scale(${lbZoom}) translate(${lbPanX/lbZoom}px,${lbPanY/lbZoom}px)`;
+      lbZoomLabel.textContent = Math.round(lbZoom*100)+'%';
+      lbImg.style.cursor = lbZoom > 1 ? (lbDragging ? 'grabbing' : 'grab') : 'default';
+    }
+    function lbZoomIn()  { lbZoom = Math.min(lbZoom+0.25,4); lbApply(); }
+    function lbZoomOut() { lbZoom = Math.max(lbZoom-0.25,0.5); if(lbZoom===1){lbPanX=0;lbPanY=0;} lbApply(); }
+    function closeLightbox() { lb.style.display='none'; lbImg.src=''; lbZoom=1; lbPanX=0; lbPanY=0; lbApply(); }
+
+    lbImg.addEventListener('mousedown', e => { if(lbZoom<=1)return; lbDragging=true; lbSX=e.clientX-lbPanX; lbSY=e.clientY-lbPanY; lbApply(); e.preventDefault(); });
+    document.addEventListener('mousemove', e => { if(!lbDragging)return; lbPanX=e.clientX-lbSX; lbPanY=e.clientY-lbSY; lbApply(); });
+    document.addEventListener('mouseup', () => { if(!lbDragging)return; lbDragging=false; lbApply(); });
+    lbImg.addEventListener('wheel', e => { e.preventDefault(); e.deltaY<0?lbZoomIn():lbZoomOut(); }, {passive:false});
+    lb.addEventListener('click', e => { if(e.target===lb) closeLightbox(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+    document.querySelectorAll('.expandable').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbZoom=1; lbPanX=0; lbPanY=0; lbApply();
+        lb.style.display='flex';
+      });
+    });
+  </script>
+  <script>
+  /* scroll-reveal-init */
+  (function() {
+    setTimeout(function() {
+      var sel = [
+        '.project-card','.ops-card','.value-card','.step','.step-card',
+        '.strategy-card','.bento-item','.exp-item','.contact-inner',
+        '.role-card','.outcome-stat-card','.maturity-grid','.team-images',
+        '.overview-grid','.screens-grid','.screens-row',
+        '.outcome-layout','.section-img','.section-img-row','.before-after-row',
+        '.outcome-grid','.role-block','.approach-header','.work-header',
+        '.outcomes-header','.designops-header','.values-header','.team-header',
+        '.callout','.insight-block'
+      ].join(',');
+      var items = document.querySelectorAll(sel);
+      items.forEach(function(el) { el.classList.add('reveal'); });
+
+      ['.projects-grid','.ops-grid','.values-grid','.steps-grid',
+       '.past-grid','.bento-grid','.strategy-grid','.outcome-grid',
+       '.team-images','.section-img-row',
+       '.case-hero-stats','.hero-actions'].forEach(function(g) {
+        document.querySelectorAll(g).forEach(function(grid) {
+          Array.from(grid.children).forEach(function(c, i) {
+            c.style.transitionDelay = (i * 0.1) + 's';
+          });
+        });
+      });
+
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+      items.forEach(function(el) { io.observe(el); });
+
+      // Stat count-up
+      document.querySelectorAll('.hero-stat-num, .stat-num').forEach(function(el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/^([^0-9]*)(\d+(?:\.\d+)?)(.*)$/);
+        if (!m || parseFloat(m[2]) === 0) return;
+        var pre = m[1], numStr = m[2], suf = m[3];
+        var target = parseFloat(numStr);
+        var dec = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+        var fired = false;
+        var cio = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (!e.isIntersecting || fired) return;
+            fired = true; cio.unobserve(e.target);
+            var t0 = performance.now(), dur = 950;
+            (function tick(now) {
+              var p = Math.min((now - t0) / dur, 1);
+              var v = target * (1 - Math.pow(1 - p, 3));
+              el.textContent = pre + v.toFixed(dec) + suf;
+              if (p < 1) requestAnimationFrame(tick);
+            })(t0);
+          });
+        }, { threshold: 0.6 });
+        cio.observe(el);
+      });
+    }, 460);
+  })();
+  </script>
+
+</body>
+</html>
