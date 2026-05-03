@@ -155,7 +155,6 @@
 
     .case-cover img {
       width: 100%;
-      border-radius: var(--radius);
       display: block;
     }
 
@@ -287,7 +286,6 @@
 
     .section-img-row img {
       width: 100%;
-      border-radius: 10px;
       display: block;
     }
 
@@ -507,7 +505,6 @@
 
     .before-after-item img {
       width: 100%;
-      border-radius: 10px;
       display: block;
     }
 
@@ -751,7 +748,7 @@
             <div class="gallery-label">Design Exploration</div>
             <p class="gallery-desc">Early exploration of the portal's content areas, layouts, and information hierarchy before moving into high-fidelity design.</p>
           </div>
-          <img src="../images/clientportal/exploration.png" alt="Design Exploration" style="width:100%; border-radius:12px; display:block;" />
+          <img src="../images/clientportal/exploration.png" alt="Design Exploration" style="width:100%; display:block;" />
         </div>
 
       </div>
@@ -786,11 +783,11 @@
         <div class="before-after-row">
           <div class="before-after-item">
             <span class="before-after-label label-before">Before</span>
-            <img src="../images/clientportal/gainloss-before.png" alt="Gain/Loss Before" style="width:100%; border-radius:10px; display:block;" />
+            <img src="../images/clientportal/gainloss-before.png" alt="Gain/Loss Before" style="width:100%; display:block;" />
           </div>
           <div class="before-after-item">
             <span class="before-after-label label-after">After</span>
-            <img src="../images/clientportal/gainloss-after.png" alt="Gain/Loss After" style="width:100%; border-radius:10px; display:block;" />
+            <img src="../images/clientportal/gainloss-after.png" alt="Gain/Loss After" style="width:100%; display:block;" />
           </div>
         </div>
       </div>
@@ -803,10 +800,10 @@
         <p style="font-size:15px; color:var(--muted); line-height:1.75; margin-top:12px;">Defined the information color tokens for dark mode ensuring WCAG-compliant contrast across all data visualizations and financial indicators.</p>
         <div style="display:flex; gap:16px; overflow-x:auto; padding-bottom:12px; margin-top:28px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;">
           <div style="flex:0 0 auto; width:560px; scroll-snap-align:start;">
-            <img src="../images/clientportal/designsystemDashboard.png" alt="Design System Dashboard" style="width:100%; border-radius:12px; display:block;" />
+            <img src="../images/clientportal/designsystemDashboard.png" alt="Design System Dashboard" style="width:100%; display:block;" />
           </div>
           <div style="flex:0 0 auto; width:560px; scroll-snap-align:start;">
-            <img src="../images/clientportal/designsystemWidget.png" alt="Design System Widget" style="width:100%; border-radius:12px; display:block;" />
+            <img src="../images/clientportal/designsystemWidget.png" alt="Design System Widget" style="width:100%; display:block;" />
           </div>
         </div>
       </div>
@@ -863,7 +860,7 @@
 
   <!-- LIGHTBOX -->
   <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:32px;">
-    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; border-radius:10px; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
+    <img id="lightbox-img" src="" style="max-width:100%; max-height:90vh; object-fit:contain; box-shadow:0 32px 80px rgba(0,0,0,0.5); transform-origin:center; transition:transform 0.2s ease;" />
     <div id="lightbox-controls" style="position:fixed; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.15); border-radius:100px; padding:8px 16px;">
       <button onclick="zoomOut()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">−</button>
       <span id="zoom-level" style="font-size:13px; color:rgba(255,255,255,0.7); font-family:var(--font); width:44px; text-align:center;">100%</span>
